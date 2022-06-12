@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 interface CarMotionData {
   m_worldPositionX: number; // World space X position

@@ -1,4 +1,4 @@
-import {F1Parser} from '../../F1parser';
+import {F1Parser} from '../../f1.parser';
 
 export class LapDataParser extends F1Parser {
   constructor() {
@@ -31,7 +31,7 @@ export class LapDataParser extends F1Parser {
   }
 }
 
-import {PacketHeaderParser} from '../../PacketHeader/PacketHeader.parser';
+import {PacketHeaderParser} from '../../PacketHeader/parser';
 import {PacketLapData} from '../types';
 
 export class PacketLapDataParser extends F1Parser {

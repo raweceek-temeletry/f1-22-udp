@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 export interface FastestLap {
   vehicleIdx: number;

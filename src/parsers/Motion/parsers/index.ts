@@ -1,5 +1,5 @@
-import {F1Parser} from '../../F1parser';
-import {PacketHeaderParser} from '../../PacketHeader/PacketHeader.parser';
+import {F1Parser} from '../../f1.parser';
+import {PacketHeaderParser} from '../../PacketHeader/parser';
 import {PacketMotionData} from '../types';
 
 class CarMotionDataParser extends F1Parser {

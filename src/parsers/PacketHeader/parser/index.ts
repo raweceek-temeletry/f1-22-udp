@@ -1,4 +1,4 @@
-import {F1Parser} from '../F1parser';
+import {F1Parser} from '../../f1.parser';
 
 export class PacketHeaderParser extends F1Parser {
   constructor(bigintEnabled = false) {

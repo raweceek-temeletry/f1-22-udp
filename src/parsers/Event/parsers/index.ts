@@ -1,7 +1,7 @@
 import {Parser} from 'binary-parser';
-import {F1Parser} from '../../F1parser';
+import {F1Parser} from '../../f1.parser';
 
-import {PacketHeaderParser} from '../../PacketHeader/PacketHeader.parser';
+import {PacketHeaderParser} from '../../PacketHeader/parser';
 import {PacketEventData} from '../types';
 export type EventCode = string;
 
