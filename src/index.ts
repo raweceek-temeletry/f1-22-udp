@@ -4,6 +4,7 @@ import {PacketMotionDataParser} from './parsers/Motion/parsers';
 import {PacketSessionDataParser} from './parsers/Session/parsers';
 import {packetSize} from './constants';
 import {PacketLapDataParser} from './parsers/LapData/parsers';
+import {PacketEventDataParser} from './parsers/Event/parsers';
 
 export class F122UDP extends EventEmitter {
   private socket: Socket;
@@ -43,14 +44,16 @@ export class F122UDP extends EventEmitter {
             const {data} = new PacketLapDataParser(msg);
             this.emit('lap', data);
             console.log(data);
-            // console.log("LapData");
             break;
           }
-          case packetSize.Event:
-            // console.log("Event");
+          case packetSize.Event:{
+            const {data} = new PacketEventDataParser(msg);
+            this.emit('event', data);
+
             break;
+          }
           case packetSize.Participants:
-            // console.log("Participants");
+            console.log('Participants');
             break;
           case packetSize.CarSetups:
             // console.log("CarSetups");
