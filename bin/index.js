@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-
-
 /**
  * It checks if a string is a valid IP address and port number
  * @param str - The string to be tested.
@@ -12,7 +10,6 @@ function isValid_IP_and_Port(str) {
     /^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]):([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/;
   return cong.test(str);
 }
-
 
 /**
  * It extracts the port number from a string of the form `"xxx.xxx.xxx.xxx:yyyyy"` where `xxx` is an IP
@@ -25,13 +22,12 @@ function extractPort(str) {
     /^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]):([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/;
   const port = cong.exec(str);
   if (port) {
-    return parseInt(port[ 5 ]);
+    return parseInt(port[5]);
   }
   console.log('function extractPort: invalid port, using default port 20777');
 
   return 20777;
 }
-
 
 /**
  * It takes a string and returns the IP address if it's valid, otherwise it returns an empty string
@@ -43,7 +39,7 @@ function extractIP(str) {
     /^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]):([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/;
   const result = cong.exec(str);
   if (result) {
-    return result[ 1 ] + '.' + result[ 2 ] + '.' + result[ 3 ] + '.' + result[ 4 ];
+    return result[1] + '.' + result[2] + '.' + result[3] + '.' + result[4];
   }
   return '';
 }
@@ -53,7 +49,7 @@ const validArgs = [];
 /* It's importing the dgram module. */
 const dgram = require('dgram');
 /* It's a variable that will hold the socket. */
-let socket // created on --forward command because 
+let socket; // created on --forward command because
 /* It's an array that will hold the valid IP addresses and port numbers. */
 const args = process.argv.slice(2);
 /* It's slicing the array of arguments from the third element. */
@@ -67,7 +63,7 @@ const ValidLogArgs = [];
  * @param args2 - The arguments passed to the command
  */
 function validateLogArgs(args2) {
-  args2.map((x) => {
+  args2.map(x => {
     if (x.length >= 0 && x.length <= 11) {
       ValidLogArgs.push(x);
     }
@@ -114,7 +110,7 @@ if (args.length === 0) {
 }
 
 /* It's checking if the user has entered the `-f` or `--forward` flag. */
-if (args[ 0 ] === '-f' || args[ 0 ] === '--forward') {
+if (args[0] === '-f' || args[0] === '--forward') {
   /* It's creating a socket. */
   socket = dgram.createSocket('udp4');
   /* It's binding the socket to the port 20777 and the IP address 127.0.0.1. */
@@ -139,7 +135,7 @@ if (args[ 0 ] === '-f' || args[ 0 ] === '--forward') {
 
       const port = extractPort(arg);
 
-      validArgs.push({ ip: ip, port: port });
+      validArgs.push({ip: ip, port: port});
     } else {
       console.error(`
             "${arg}"'is not valid!
@@ -159,7 +155,7 @@ if (args[ 0 ] === '-f' || args[ 0 ] === '--forward') {
 }
 
 /* It's checking if the user has entered the `--log` or `-l` flag. */
-if (args[ 0 ] === '--log' || args[ 0 ] === '-l') {
+if (args[0] === '--log' || args[0] === '-l') {
   /* It's checking if the user has entered any arguments. */
   if (setOfLogArgs.size === 0) {
     console.log(`
@@ -190,7 +186,6 @@ if (args[ 0 ] === '--log' || args[ 0 ] === '-l') {
   }
 }
 
-
 /**
  * The function `forward()` listens for incoming UDP packets on the port specified by the user, and
  * then forwards those packets to the IP addresses and ports specified by the user
@@ -209,8 +204,8 @@ function forward() {
     by the user. */
     validArgs.map(valid => {
       const s2 = dgram.createSocket('udp4');
-      socket.on('message', (m) => {
-        s2.send(m, 0, m.length, valid.port, valid.ip, (err) => {
+      socket.on('message', m => {
+        s2.send(m, 0, m.length, valid.port, valid.ip, err => {
           /* It's checking if there is an error. */
           if (err) {
             console.log(err);
@@ -223,7 +218,6 @@ function forward() {
   });
 }
 
-
 /**
  * It logs the data from the F1 2021 game to the console.
  */
@@ -234,101 +228,89 @@ function log() {
   /* It's creating a new instance of the `F1TelemetryClient` class. */
   const client = new parser();
 
-
-
   /* It's checking if the user has entered the `0` argument. */
   if (setOfLogArgs.has('0')) {
-    client.on('motion', (data) => {
+    client.on('motion', data => {
       console.log(data);
     });
   }
 
   /* It's checking if the user has entered the `1` argument. */
   if (setOfLogArgs.has('1')) {
-    client.on('session', (data) => {
+    client.on('session', data => {
       console.log(data);
     });
   }
 
   /* It's checking if the user has entered the `2` argument. */
   if (setOfLogArgs.has('2')) {
-    client.on('lapData', (data) => {
+    client.on('lapData', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `3` argument. */
   if (setOfLogArgs.has('3')) {
-    client.on('event', (data) => {
+    client.on('event', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `4` argument. */
   if (setOfLogArgs.has('4')) {
-    client.on('participants', (data) => {
+    client.on('participants', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `5` argument. */
   if (setOfLogArgs.has('5')) {
-    client.on('carSetups', (data) => {
+    client.on('carSetups', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `6` argument. */
   if (setOfLogArgs.has('6')) {
-    client.on('carTelemetry', (data) => {
+    client.on('carTelemetry', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `7` argument. */
   if (setOfLogArgs.has('7')) {
-    client.on('carStatus', (data) => {
+    client.on('carStatus', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `8` argument. */
   if (setOfLogArgs.has('8')) {
-    client.on('finalClassification', (data) => {
+    client.on('finalClassification', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `9` argument. */
   if (setOfLogArgs.has('9')) {
-    client.on('lobbyInfo', (data) => {
+    client.on('lobbyInfo', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `10` argument. */
   if (setOfLogArgs.has('10')) {
-    client.on('carDamage', (data) => {
+    client.on('carDamage', data => {
       console.log(data);
     });
   }
-
 
   /* It's checking if the user has entered the `11` argument. */
   if (setOfLogArgs.has('11')) {
-    client.on('sessionHistory', (data) => {
+    client.on('sessionHistory', data => {
       console.log(data);
     });
   }
-
 
   /* It's starting the client. */
   client.start();
