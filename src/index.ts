@@ -46,7 +46,7 @@ export class F122UDP extends EventEmitter {
             console.log(data);
             break;
           }
-          case packetSize.Event:{
+          case packetSize.Event: {
             const {data} = new PacketEventDataParser(msg);
             this.emit('event', data);
 
