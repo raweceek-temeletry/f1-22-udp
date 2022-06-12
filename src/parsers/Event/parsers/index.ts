@@ -57,27 +57,14 @@ export class PenaltyParser extends F1Parser {
   constructor() {
     super();
 
-    this.endianess('little')
-      .uint8('penaltyType')
-      .uint8('infringementType')
-      .uint8('vehicleIdx')
-      .uint8('otherVehicleIdx')
-      .uint8('time')
-      .uint8('lapNum')
-      .uint8('placesGained');
+    this.endianess('little').uint8('penaltyType').uint8('infringementType').uint8('vehicleIdx').uint8('otherVehicleIdx').uint8('time').uint8('lapNum').uint8('placesGained');
   }
 }
 
 export class SpeedTrapParser extends F1Parser {
   constructor() {
     super();
-    this.endianess('little')
-      .uint8('vehicleIdx')
-      .floatle('speed')
-      .uint8('isOverallFastestInSession')
-      .uint8('isDriverFastestInSession')
-      .uint8('fastestVehicleIdxInSession')
-      .floatle('fastestSpeedInSession');
+    this.endianess('little').uint8('vehicleIdx').floatle('speed').uint8('isOverallFastestInSession').uint8('isDriverFastestInSession').uint8('fastestVehicleIdxInSession').floatle('fastestSpeedInSession');
   }
 }
 
@@ -169,10 +156,7 @@ export class PacketEventDataParser extends F1Parser {
   constructor(buffer: Buffer) {
     super();
 
-    this.endianess('little')
-      .nest('m_header', {type: new PacketHeaderParser()})
-      .string('m_eventStringCode', {length: 4})
-      .unpack2021Format(buffer);
+    this.endianess('little').nest('m_header', {type: new PacketHeaderParser()}).string('m_eventStringCode', {length: 4}).unpack2021Format(buffer);
 
     this.data = this.fromBuffer(buffer) as PacketEventData;
   }
@@ -208,10 +192,7 @@ export class PacketEventDataParser extends F1Parser {
   };
 
   getEventStringCode = (buffer: Buffer) => {
-    const headerParser = new Parser()
-      .endianess('little')
-      .nest('m_header', {type: new PacketHeaderParser()})
-      .string('m_eventStringCode', {length: 4});
+    const headerParser = new Parser().endianess('little').nest('m_header', {type: new PacketHeaderParser()}).string('m_eventStringCode', {length: 4});
     const {m_eventStringCode} = headerParser.parse(buffer);
     return m_eventStringCode;
   };

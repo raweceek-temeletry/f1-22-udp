@@ -23,6 +23,7 @@ export enum packetSize {
   CarSetups = 1102,
   CarTelemetry = 1347,
   CarStatus = 1058,
+  Finallassification = 1015,
   LobbyInfo = 1191,
   CarDamage = 882,
   SessionHistory = 1155,
