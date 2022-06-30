@@ -1,6 +1,6 @@
 import {Parser} from 'binary-parser';
 import {PacketFinalClassificationData} from 'FinalClassification/types';
-import {PacketHeaderParser} from 'PacketHeader/parser';
+import {PacketHeaderParser} from '../../PacketHeader/parser';
 import {F1Parser} from '../../f1.parser';
 
 export class FinalClassificationDataParser extends F1Parser {
@@ -21,15 +21,15 @@ export class FinalClassificationDataParser extends F1Parser {
       .uint8('m_numPenalties')
       .uint8('m_numTyreStints')
 
-      .array('m_tyreStintsActual', {
+      .array('m_tyreStintsActual',{
         length: 8,
         type: new Parser().uint8(''),
       })
-      .array('m_tyreStintsVisual', {
+      .array('m_tyreStintsVisual',{
         length: 8,
         type: new Parser().uint8(''),
       })
-      .array('m_tyreStintsEndLaps', {
+      .array('m_tyreStintsEndLaps',{
         length: 8,
         type: new Parser().uint8(''),
       });
@@ -39,15 +39,15 @@ export class FinalClassificationDataParser extends F1Parser {
 export class PacketFinalClassificationDataParser extends F1Parser {
   data: PacketFinalClassificationData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer,bigintEnabled: boolean) {
     super();
 
     this.endianess('little')
-      .nest('m_header', {
+      .nest('m_header',{
         type: new PacketHeaderParser(bigintEnabled),
       })
       .uint8('m_numCars')
-      .array('m_classificationData', {
+      .array('m_classificationData',{
         length: 22,
         type: new FinalClassificationDataParser(),
       });

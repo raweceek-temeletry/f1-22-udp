@@ -9,9 +9,12 @@ import {PacketLapDataParser} from './parsers/LapData/parsers';
 import {PacketMotionDataParser} from './parsers/Motion/parsers';
 import {PacketParticipantsParser} from './parsers/Participants/parsers';
 import {PacketSessionDataParser} from './parsers/Session/parsers';
+import {PacketFinalClassificationDataParser} from './parsers/FinalClassification/parsers';
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
+let fs = require('fs');
+fs.mkdirSync('carStatusMsg',{recursive: true});
 
 interface Options {
   port?: number;
@@ -26,19 +29,14 @@ export class F122UDP extends EventEmitter {
   constructor(options: Options = {}) {
     super();
 
-    const {
-      port = DEFAULT_PORT,
-      address = ADDRESS,
-    } = options;
+    const {port = DEFAULT_PORT,address = ADDRESS} = options;
 
     this.port = port;
     this.address = address;
     this.socket = createSocket('udp4');
-
-
   }
 
-  // create socket  
+  // create socket
   start() {
     // if socket is not created, create it
     if(!this.socket) {
@@ -62,7 +60,6 @@ export class F122UDP extends EventEmitter {
               // console.log('Session');
               const {data} = new PacketSessionDataParser(msg);
               this.emit('session',data);
-
             }
 
             break;
@@ -70,7 +67,6 @@ export class F122UDP extends EventEmitter {
             const {data} = new PacketLapDataParser(msg);
             this.emit('lap',data);
             // console.log("lap");
-
 
             break;
           }
@@ -88,7 +84,6 @@ export class F122UDP extends EventEmitter {
             // console.log("participants");
             // console.log(data);
 
-
             break;
           }
           case packetSize.CarSetups: {
@@ -96,6 +91,9 @@ export class F122UDP extends EventEmitter {
             const {data} = new PacketCarSetupDataParser(msg,false);
             this.emit('carSetups',data);
             // console.log("carSetups");
+            // log packet size
+
+
             // console.log(data);
 
             break;
@@ -109,24 +107,34 @@ export class F122UDP extends EventEmitter {
 
             break;
           }
+          
           case packetSize.CarStatus: {
             // console.log("CarStatus");
             const {data} = new PacketCarStatusDataParser(msg,true);
             this.emit('carStatus',data);
             break;
           }
+
+          case packetSize.Finallassification: {
+            const {data} = new PacketFinalClassificationDataParser(msg,true);
+            this.emit('finallassification',data);
+            console.log("finallassification");
+            console.log(data);
+            break;
+          }
+
           case packetSize.LobbyInfo:
             // console.log('LobbyInfo');
-            
+
             break;
           case packetSize.CarDamage:
-            // console.log("CarDamage"); // ok 
+            // console.log("CarDamage"); // ok
             break;
           case packetSize.SessionHistory:
             // console.log("SessionHistory");
             break;
           default:
-            console.log("Unknown");
+            console.log('Unknown');
             break;
         }
       });

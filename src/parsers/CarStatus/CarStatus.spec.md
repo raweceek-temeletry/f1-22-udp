@@ -39,3 +39,7 @@ struct PacketCarStatusData
 
     CarStatusData	m_carStatusData[22];
 };
+
+
+[]: # Language: markdown
+[]: # Path: src/parsers/CarStatus/CarStatus.spec.md

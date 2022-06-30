@@ -17,7 +17,7 @@ export enum packetID {
 export enum packetSize {
   Motion = 1464,
   Session = 632,
-  LapData = 972, // 972 for 22
+  LapData = 972,
   Event = 40,
   Participants = 1257,
   CarSetups = 1102,
