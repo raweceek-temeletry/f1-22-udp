@@ -1,5 +1,5 @@
 import {PacketCarStatusDataParser} from './parsers/CarStatus/parsers';
-import {createSocket, RemoteInfo, Socket} from 'node:dgram';
+import {createSocket,RemoteInfo,Socket} from 'node:dgram';
 import {EventEmitter} from 'node:stream';
 import {packetSize} from './constants';
 import {PacketCarSetupDataParser} from './parsers/CarSetup/parsers';
@@ -10,93 +10,123 @@ import {PacketMotionDataParser} from './parsers/Motion/parsers';
 import {PacketParticipantsParser} from './parsers/Participants/parsers';
 import {PacketSessionDataParser} from './parsers/Session/parsers';
 
+const DEFAULT_PORT = 20777;
+const ADDRESS = 'localhost';
+
+interface Options {
+  port?: number;
+  address?: string;
+}
+
 export class F122UDP extends EventEmitter {
   private socket: Socket;
-  constructor() {
+
+  port: number;
+  address: string;
+  constructor(options: Options = {}) {
     super();
+
+    const {
+      port = DEFAULT_PORT,
+      address = ADDRESS,
+    } = options;
+
+    this.port = port;
+    this.address = address;
     this.socket = createSocket('udp4');
+
+
   }
 
-  // create socket
+  // create socket  
   start() {
     // if socket is not created, create it
-    if (!this.socket) {
+    if(!this.socket) {
       this.socket = createSocket('udp4');
     }
-    this.socket.bind({port: 20777, address: '192.168.88.200'});
+    this.socket.bind({port: this.port,address: this.address});
     console.log('start');
-    this.socket.on('listening', (): void => {
-      console.log('F122UDP listening on: ', this.socket.address().address, ':', this.socket.address().port);
-      this.socket.on('message', (msg: Buffer, rinfo: RemoteInfo): void => {
-        switch (rinfo.size) {
+    this.socket.on('listening',(): void => {
+      console.log('listening');
+      console.log('F122UDP listening on: ',this.socket.address().address,':',this.socket.address().port);
+      this.socket.on('message',(msg: Buffer,rinfo: RemoteInfo): void => {
+        switch(rinfo.size) {
           case packetSize.Motion: {
             const {data} = new PacketMotionDataParser(msg);
-            this.emit('motion', data);
-            // console.log(motionDataPacket);
+            this.emit('motion',data);
+
             break;
           }
           case packetSize.Session:
             {
-              console.log('Session');
+              // console.log('Session');
               const {data} = new PacketSessionDataParser(msg);
-              this.emit('session', data);
-              // console.log(data);
+              this.emit('session',data);
+
             }
 
             break;
           case packetSize.LapData: {
             const {data} = new PacketLapDataParser(msg);
-            this.emit('lap', data);
-            // console.log(data);
+            this.emit('lap',data);
+            // console.log("lap");
+
+
             break;
           }
           case packetSize.Event: {
             const {data} = new PacketEventDataParser(msg);
-            this.emit('event', data);
+            // console.log("event");
+
+            this.emit('event',data);
 
             break;
           }
           case packetSize.Participants: {
-            console.log('Participants');
             const {data} = new PacketParticipantsParser(msg);
-            this.emit('participants', data);
+            this.emit('participants',data);
+            // console.log("participants");
             // console.log(data);
+
 
             break;
           }
           case packetSize.CarSetups: {
             // console.log("CarSetups");
-            const {data} = new PacketCarSetupDataParser(msg, false);
-            this.emit('carSetups', data);
+            const {data} = new PacketCarSetupDataParser(msg,false);
+            this.emit('carSetups',data);
+            // console.log("carSetups");
+            // console.log(data);
 
             break;
           }
           case packetSize.CarTelemetry: {
             // console.log("CarTelemetry");
-            const {data} = new PacketCarTelemetryDataParser(msg, false);
-            this.emit('carTelemetry', data);
+            const {data} = new PacketCarTelemetryDataParser(msg,false);
+            this.emit('carTelemetry',data);
+            // console.log("carTelemetry");
             // console.log(data);
 
             break;
           }
           case packetSize.CarStatus: {
             // console.log("CarStatus");
-            const {data} = new PacketCarStatusDataParser(msg, true);
-            this.emit('carStatus', data);
-            // console.log(data);
+            const {data} = new PacketCarStatusDataParser(msg,true);
+            this.emit('carStatus',data);
             break;
           }
           case packetSize.LobbyInfo:
-            // console.log("LobbyInfo");
+            // console.log('LobbyInfo');
+            
             break;
           case packetSize.CarDamage:
-            // console.log("CarDamage");
+            // console.log("CarDamage"); // ok 
             break;
           case packetSize.SessionHistory:
             // console.log("SessionHistory");
             break;
           default:
-            // console.log("Unknown");
+            console.log("Unknown");
             break;
         }
       });
@@ -112,7 +142,7 @@ export class F122UDP extends EventEmitter {
 }
 
 // process exit on ctrl+c
-process.on('SIGINT', () => {
+process.on('SIGINT',() => {
   console.log('SIGINT');
   //   process.exit(1);
 });
