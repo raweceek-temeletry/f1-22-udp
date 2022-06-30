@@ -11,6 +11,7 @@ import {PacketParticipantsParser} from './parsers/Participants/parsers';
 import {PacketSessionDataParser} from './parsers/Session/parsers';
 import {PacketFinalClassificationDataParser} from './parsers/FinalClassification/parsers';
 import {PacketLobbyInfoDataParser} from './parsers/lobby/parsers';
+import {PacketCarDamageDataParser} from './parsers/CarDamage/parsers';
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
@@ -132,7 +133,12 @@ export class F122UDP extends EventEmitter {
             }
             break;
           case packetSize.CarDamage:
-            // console.log("CarDamage"); // ok
+            {
+              // console.log("CarDamage"); // ok
+              const {data} = new PacketCarDamageDataParser(msg, true);
+              this.emit('carDamage', data);
+              // console.log(data);
+            }
             break;
           case packetSize.SessionHistory:
             // console.log("SessionHistory");
