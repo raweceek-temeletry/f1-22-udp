@@ -18,13 +18,13 @@ export enum packetSize {
   Motion = 1464,
   Session = 632,
   LapData = 972, // 972 for 22
-  Event = 36,
+  Event = 40,
   Participants = 1257,
   CarSetups = 1102,
   CarTelemetry = 1347,
   CarStatus = 1058,
   Finallassification = 1015,
   LobbyInfo = 1191,
-  CarDamage = 882,
+  CarDamage = 948,
   SessionHistory = 1155,
 }
