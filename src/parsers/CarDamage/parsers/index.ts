@@ -34,11 +34,11 @@ export class CarDamageDataParser extends F1Parser {
 export class PacketCarDamageDataParser extends F1Parser {
   data: PacketCarDamageData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer) {
     super();
     this.endianess('little')
       .nest('m_header', {
-        type: new PacketHeaderParser(bigintEnabled),
+        type: new PacketHeaderParser(),
       })
       .array('m_carDamageData', {
         length: 22,
@@ -46,5 +46,6 @@ export class PacketCarDamageDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketCarDamageData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

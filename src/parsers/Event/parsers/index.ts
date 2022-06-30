@@ -159,6 +159,7 @@ export class PacketEventDataParser extends F1Parser {
     this.endianess('little').nest('m_header', {type: new PacketHeaderParser()}).string('m_eventStringCode', {length: 4}).unpack2021Format(buffer);
 
     this.data = this.fromBuffer(buffer) as PacketEventData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 
   unpack2021Format = (buffer: Buffer) => {

@@ -1,3 +1,4 @@
+import {PacketHeader} from '../../PacketHeader/types';
 interface MarshalZone {
   m_zoneStart: number;
   m_zoneFlag: number;
@@ -15,7 +16,7 @@ interface WeatherForecastSample {
 }
 
 export interface PacketSessionData {
-  m_header: number;
+  m_header: PacketHeader;
   m_weather: number;
   m_trackTemperature: number;
   m_airTemperature: number;

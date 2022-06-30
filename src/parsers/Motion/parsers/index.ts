@@ -50,5 +50,6 @@ export class PacketMotionDataParser extends F1Parser {
       .floatle('m_frontWheelsAngle');
 
     this.data = this.fromBuffer(msg) as PacketMotionData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

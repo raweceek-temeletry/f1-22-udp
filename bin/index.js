@@ -223,7 +223,7 @@ function forward() {
  */
 function log() {
   /* It's importing the `F1TelemetryClient` class from the `f1-22-udp` module. */
-  const parser = require('f1-22-udp').F1TelemetryClient;
+  const parser = require('f1-22-udp').F122UDP;
   console.log('loging..');
   /* It's creating a new instance of the `F1TelemetryClient` class. */
   const client = new parser();

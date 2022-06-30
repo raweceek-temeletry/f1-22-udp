@@ -45,12 +45,12 @@ import {PacketCarTelemetryData} from '../types';
 export class PacketCarTelemetryDataParser extends F1Parser {
   data: PacketCarTelemetryData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer) {
     super();
 
     this.endianess('little')
       .nest('m_header', {
-        type: new PacketHeaderParser(bigintEnabled),
+        type: new PacketHeaderParser(),
       })
 
       .array('m_carTelemetryData', {
@@ -63,5 +63,6 @@ export class PacketCarTelemetryDataParser extends F1Parser {
       .int8('m_suggestedGear');
 
     this.data = this.fromBuffer(buffer) as PacketCarTelemetryData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

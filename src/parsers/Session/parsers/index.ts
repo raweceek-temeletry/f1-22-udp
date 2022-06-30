@@ -97,8 +97,9 @@ export class PacketSessionDataParser extends F1Parser {
   constructor(buffer: Buffer) {
     super();
     this.endianess('little')
-      //PacketHeader
-      .nest('m_header', {type: new PacketHeaderParser()})
+      .nest('m_header', {
+        type: new PacketHeaderParser(),
+      })
       //uint8
       .uint8('m_weather')
       //int8
@@ -184,6 +185,7 @@ export class PacketSessionDataParser extends F1Parser {
       //uint8
       .uint8('m_sessionLength');
 
-    this.data = this.fromBuffer(buffer);
+    this.data = this.fromBuffer(buffer) as PacketSessionData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

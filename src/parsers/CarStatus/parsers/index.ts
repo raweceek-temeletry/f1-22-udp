@@ -37,18 +37,18 @@ import {PacketCarStatusData} from '../types';
 export class PacketCarStatusDataParser extends F1Parser {
   data: PacketCarStatusData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer) {
     super();
 
     this.endianess('little')
       .nest('m_header', {
-        type: new PacketHeaderParser(bigintEnabled),
+        type: new PacketHeaderParser(),
       })
       .array('m_carStatusData', {
         length: 22,
         type: new CarStatusDataParser(),
       });
-
     this.data = this.fromBuffer(buffer) as PacketCarStatusData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

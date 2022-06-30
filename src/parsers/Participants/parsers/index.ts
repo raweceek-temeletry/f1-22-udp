@@ -37,6 +37,7 @@ export class PacketParticipantsParser extends F1Parser {
       .uint8('m_numActiveCars')
       .array('m_participants', {type: new ParticipantParser(), length: 22});
 
-    this.data = this.fromBuffer(buffer);
+    this.data = this.fromBuffer(buffer) as PacketParticipantsData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

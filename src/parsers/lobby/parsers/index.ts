@@ -13,16 +13,17 @@ import {PacketHeaderParser} from '../../PacketHeader/parser';
 export class PacketLobbyInfoDataParser extends F1Parser {
   data: PacketLobbyInfoData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer) {
     super();
 
     this.endianess('little')
       .nest('m_header', {
-        type: new PacketHeaderParser(bigintEnabled),
+        type: new PacketHeaderParser(),
       })
       .uint8('m_numPlayers')
       .array('m_lobbyPlayers', {length: 22, type: new LobbyInfoDataParser()});
 
     this.data = this.fromBuffer(buffer) as PacketLobbyInfoData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

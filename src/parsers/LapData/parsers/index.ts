@@ -52,5 +52,6 @@ export class PacketLapDataParser extends F1Parser {
       /*uint8*/ .uint8('m_timeTrialRivalCarIdx');
 
     this.data = this.fromBuffer(buffer) as PacketLapData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }

@@ -39,12 +39,12 @@ export class FinalClassificationDataParser extends F1Parser {
 export class PacketFinalClassificationDataParser extends F1Parser {
   data: PacketFinalClassificationData;
 
-  constructor(buffer: Buffer, bigintEnabled: boolean) {
+  constructor(buffer: Buffer) {
     super();
 
     this.endianess('little')
       .nest('m_header', {
-        type: new PacketHeaderParser(bigintEnabled),
+        type: new PacketHeaderParser(),
       })
       .uint8('m_numCars')
       .array('m_classificationData', {
@@ -53,5 +53,6 @@ export class PacketFinalClassificationDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketFinalClassificationData;
+    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
   }
 }
