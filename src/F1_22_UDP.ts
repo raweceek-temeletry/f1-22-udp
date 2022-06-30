@@ -285,7 +285,8 @@ export class F122UDP extends EventEmitter {
   }
 }
 
-// process exit on ctrl+c
-process.on('SIGINT', () => {
-  //   process.exit(1);
-});
+// ony for library development purposes
+// // process exit on ctrl+c
+// process.on('SIGINT', () => {
+//   //   process.exit(1);
+// });
