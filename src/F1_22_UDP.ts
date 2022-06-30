@@ -1,5 +1,5 @@
 import {PacketCarStatusDataParser} from './parsers/CarStatus/parsers';
-import {createSocket,RemoteInfo,Socket} from 'node:dgram';
+import {createSocket, RemoteInfo, Socket} from 'node:dgram';
 import {EventEmitter} from 'node:stream';
 import {packetSize} from './constants';
 import {PacketCarSetupDataParser} from './parsers/CarSetup/parsers';
@@ -13,8 +13,8 @@ import {PacketFinalClassificationDataParser} from './parsers/FinalClassification
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
-let fs = require('fs');
-fs.mkdirSync('carStatusMsg',{recursive: true});
+const fs = require('fs');
+fs.mkdirSync('carStatusMsg', {recursive: true});
 
 interface Options {
   port?: number;
@@ -29,7 +29,7 @@ export class F122UDP extends EventEmitter {
   constructor(options: Options = {}) {
     super();
 
-    const {port = DEFAULT_PORT,address = ADDRESS} = options;
+    const {port = DEFAULT_PORT, address = ADDRESS} = options;
 
     this.port = port;
     this.address = address;
@@ -39,19 +39,19 @@ export class F122UDP extends EventEmitter {
   // create socket
   start() {
     // if socket is not created, create it
-    if(!this.socket) {
+    if (!this.socket) {
       this.socket = createSocket('udp4');
     }
-    this.socket.bind({port: this.port,address: this.address});
+    this.socket.bind({port: this.port, address: this.address});
     console.log('start');
-    this.socket.on('listening',(): void => {
+    this.socket.on('listening', (): void => {
       console.log('listening');
-      console.log('F122UDP listening on: ',this.socket.address().address,':',this.socket.address().port);
-      this.socket.on('message',(msg: Buffer,rinfo: RemoteInfo): void => {
-        switch(rinfo.size) {
+      console.log('F122UDP listening on: ', this.socket.address().address, ':', this.socket.address().port);
+      this.socket.on('message', (msg: Buffer, rinfo: RemoteInfo): void => {
+        switch (rinfo.size) {
           case packetSize.Motion: {
             const {data} = new PacketMotionDataParser(msg);
-            this.emit('motion',data);
+            this.emit('motion', data);
 
             break;
           }
@@ -59,13 +59,13 @@ export class F122UDP extends EventEmitter {
             {
               // console.log('Session');
               const {data} = new PacketSessionDataParser(msg);
-              this.emit('session',data);
+              this.emit('session', data);
             }
 
             break;
           case packetSize.LapData: {
             const {data} = new PacketLapDataParser(msg);
-            this.emit('lap',data);
+            this.emit('lap', data);
             // console.log("lap");
 
             break;
@@ -74,13 +74,13 @@ export class F122UDP extends EventEmitter {
             const {data} = new PacketEventDataParser(msg);
             // console.log("event");
 
-            this.emit('event',data);
+            this.emit('event', data);
 
             break;
           }
           case packetSize.Participants: {
             const {data} = new PacketParticipantsParser(msg);
-            this.emit('participants',data);
+            this.emit('participants', data);
             // console.log("participants");
             // console.log(data);
 
@@ -88,11 +88,10 @@ export class F122UDP extends EventEmitter {
           }
           case packetSize.CarSetups: {
             // console.log("CarSetups");
-            const {data} = new PacketCarSetupDataParser(msg,false);
-            this.emit('carSetups',data);
+            const {data} = new PacketCarSetupDataParser(msg, false);
+            this.emit('carSetups', data);
             // console.log("carSetups");
             // log packet size
-
 
             // console.log(data);
 
@@ -100,25 +99,25 @@ export class F122UDP extends EventEmitter {
           }
           case packetSize.CarTelemetry: {
             // console.log("CarTelemetry");
-            const {data} = new PacketCarTelemetryDataParser(msg,false);
-            this.emit('carTelemetry',data);
+            const {data} = new PacketCarTelemetryDataParser(msg, false);
+            this.emit('carTelemetry', data);
             // console.log("carTelemetry");
             // console.log(data);
 
             break;
           }
-          
+
           case packetSize.CarStatus: {
             // console.log("CarStatus");
-            const {data} = new PacketCarStatusDataParser(msg,true);
-            this.emit('carStatus',data);
+            const {data} = new PacketCarStatusDataParser(msg, true);
+            this.emit('carStatus', data);
             break;
           }
 
           case packetSize.Finallassification: {
-            const {data} = new PacketFinalClassificationDataParser(msg,true);
-            this.emit('finallassification',data);
-            console.log("finallassification");
+            const {data} = new PacketFinalClassificationDataParser(msg, true);
+            this.emit('finallassification', data);
+            console.log('finallassification');
             console.log(data);
             break;
           }
@@ -150,7 +149,7 @@ export class F122UDP extends EventEmitter {
 }
 
 // process exit on ctrl+c
-process.on('SIGINT',() => {
+process.on('SIGINT', () => {
   console.log('SIGINT');
   //   process.exit(1);
 });

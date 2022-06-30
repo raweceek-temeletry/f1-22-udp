@@ -4,7 +4,7 @@ export class CarStatusDataParser extends F1Parser {
   constructor() {
     super();
     this
-    
+
       /*uint8*/ .uint8('m_tractionControl')
       /*uint8*/ .uint8('m_antiLockBrakes')
       /*uint8*/ .uint8('m_fuelMix')
@@ -45,7 +45,7 @@ export class PacketCarStatusDataParser extends F1Parser {
         type: new PacketHeaderParser(bigintEnabled),
       })
       .array('m_carStatusData', {
-        length: 22, 
+        length: 22,
         type: new CarStatusDataParser(),
       });
 
