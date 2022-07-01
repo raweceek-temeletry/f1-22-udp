@@ -1,6 +1,6 @@
 {
   "name": "f1-22-udp",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "build/src/F1_22_UDP.js",
   "types": "build/src/F1_22_UDP.d.ts",
   "files": [

@@ -137,9 +137,13 @@ Lap Data |2|Data about all the lap times of cars in the session
 
 >The motion packet gives physics data for all the cars being driven. There is additional data for the car being driven with the goal of being able to drive a motion platform setup.
 N.B. For the normalised vectors below, to convert to float values divide by 32767.0f – 16-bit signed values are used to pack the data and on the assumption that direction values are always between -1.0f and 1.0f.
->>Frequency: Rate as specified in menus
->>>Size: 1464 bytes
->>>>Version: 1
+
+> Frequency: Rate as specified in menus
+
+> Size: 1464 bytes
+
+> Version: 1
+
 ```cpp
 struct CarMotionData
 {
@@ -192,9 +196,12 @@ struct PacketMotionData
 # Session Packet
 
 >The session packet includes details about the current session in progress.
->>Frequency: 2 per second
->>>Size: 632 bytes
->>>>Version: 1
+
+>Frequency: 2 per second
+
+>Size: 632 bytes
+
+>Version: 1
 
 ```cpp
 struct MarshalZone
@@ -280,9 +287,11 @@ struct PacketSessionData
 
 > The lap data packet gives details of all the cars in the session.
 
->> Frequency: Rate as specified in menus
->>>Size: 972 bytes
->>>>Version: 1
+> Frequency: Rate as specified in menus
+
+> ize: 972 bytes
+
+>Version: 1
 
 ```cpp
 struct LapData
@@ -328,16 +337,22 @@ struct PacketLapData
     uint8	m_timeTrialPBCarIdx; 	// Index of Personal Best car in time trial (255 if invalid)
     uint8	m_timeTrialRivalCarIdx; 	// Index of Rival car in time trial (255 if invalid)
 };
+```
 
 
-Event Packet
 
-This packet gives details of events that happen during the course of a session.
+# Event Packet
 
-Frequency: When the event occurs
-Size: 36 bytes
-Version: 1
+> This packet gives details of events that happen during the course of a session.
 
+> Frequency: When the event occurs
+
+> Size: 36 bytes
+
+> Version: 1
+
+
+```cpp
 // The event details packet is different for each type of event.
 // Make sure only the correct type is interpreted.
 union EventDataDetails
@@ -449,15 +464,18 @@ struct PacketEventData
 
 # Participants Packet
 
-This is a list of participants in the race. If the vehicle is controlled by AI, then the name will be the driver name. If this is a multiplayer game, the names will be the Steam Id on PC, or the LAN name if appropriate.
-
+> This is a list of participants in the race. If the vehicle is controlled by AI, then the name will be the   driver name. If this is a multiplayer game, the names will be the Steam Id on PC, or the LAN name if appropriate.
 N.B. on Xbox One, the names will always be the driver name, on PS4 the name will be the LAN name if playing a LAN game, otherwise it will be the driver name. 
-
 The array should be indexed by vehicle index.
 
-Frequency: Every 5 seconds
-Size: 1257 bytes
-Version: 1
+> Frequency: Every 5 seconds
+
+> Size: 1257 bytes
+
+> Version: 1
+
+
+```cpp
 
 struct ParticipantData
 {
@@ -481,16 +499,22 @@ struct PacketParticipantsData
                                          // cars on HUD
     ParticipantData m_participants[22];
 };
+```
 
 
-Car Setups Packet
 
-This packet details the car setups for each vehicle in the session. Note that in multiplayer games, other player cars will appear as blank, you will only be able to see your car setup and AI cars.
+# Car Setups Packet
 
-Frequency: 2 per second
-Size: 1102 bytes
-Version: 1
+> This packet details the car setups for each vehicle in the session. Note that in multiplayer games, other player cars will appear as blank, you will only be able to see your car setup and AI cars.
 
+> Frequency: 2 per second
+
+> Size: 1102 bytes
+
+> Version: 1
+
+
+```cpp
 struct CarSetupData
 {
     uint8     m_frontWing;                // Front wing aero
@@ -523,16 +547,21 @@ struct PacketCarSetupData
 
     CarSetupData    m_carSetups[22];
 };
+```
 
 
-Car Telemetry Packet
+# Car Telemetry Packet
 
-This packet details telemetry for all the cars in the race. It details various values that would be recorded on the car such as speed, throttle application, DRS etc. Note that the rev light configurations are presented separately as well and will mimic real life driver preferences.
+> This packet details telemetry for all the cars in the race. It details various values that would be recorded on the car such as speed, throttle application, DRS etc. Note that the rev light configurations are presented separately as well and will mimic real life driver preferences.
 
-Frequency: Rate as specified in menus
-Size: 1347 bytes
-Version: 1
+>Frequency: Rate as specified in menus
 
+>Size: 1347 bytes
+
+>Version: 1
+
+
+```cpp
 struct CarTelemetryData
 {
     uint16    m_speed;                    // Speed of car in kilometres per hour
@@ -567,16 +596,20 @@ struct PacketCarTelemetryData
     int8                m_suggestedGear;       // Suggested gear for the player (1-8)
                                                // 0 if no gear suggested
 };
+```
 
+# Car Status Packet
 
-Car Status Packet
-
-This packet details car statuses for all the cars in the race.
+> This packet details car statuses for all the cars in the race.
  
-Frequency: Rate as specified in menus
-Size: 1058 bytes
-Version: 1
+> Frequency: Rate as specified in menus
 
+> Size: 1058 bytes
+
+> Version: 1
+
+
+```cpp
 struct CarStatusData
 {
     uint8       m_tractionControl;          // Traction control - 0 = off, 1 = medium, 2 = full
@@ -621,15 +654,22 @@ struct PacketCarStatusData
 
     CarStatusData	m_carStatusData[22];
 };
+```
 
-Final Classification Packet
 
-This packet details the final classification at the end of the race, and the data will match with the post race results screen. This is especially useful for multiplayer games where it is not always possible to send lap times on the final frame because of network delay.
 
-Frequency: Once at the end of a race
-Size: 1015 bytes
-Version: 1
+# Final Classification Packet
 
+> This packet details the final classification at the end of the race, and the data will match with the post race results screen. This is especially useful for multiplayer games where it is not always possible to send lap times on the final frame because of network delay.
+
+>Frequency: Once at the end of a race
+
+>Size: 1015 bytes
+
+>Version: 1
+
+
+```cpp
 struct FinalClassificationData
 {
     uint8     m_position;              // Finishing position
@@ -685,15 +725,22 @@ struct PacketLobbyInfoData
     uint8               m_numPlayers;               // Number of players in the lobby data
     LobbyInfoData       m_lobbyPlayers[22];
 };
+```
 
-Car Damage Packet
 
-This packet details car damage parameters for all the cars in the race.
+
+# Car Damage Packet
+
+> This packet details car damage parameters for all the cars in the race.
  
-Frequency: 2 per second
-Size: 948 bytes
-Version: 1
+>Frequency: 2 per second
 
+>Size: 948 bytes
+
+>Version: 1
+
+
+```cpp
 struct CarDamageData
 {
     float     m_tyresWear[4];                     // Tyre wear (percentage)
@@ -725,16 +772,24 @@ struct PacketCarDamageData
 
     CarDamageData   m_carDamageData[22];
 };
+```
 
-Session History Packet
 
-This packet contains lap times and tyre usage for the session. This packet works slightly differently to other packets. To reduce CPU and bandwidth, each packet relates to a specific vehicle and is sent every 1/20 s, and the vehicle being sent is cycled through. Therefore in a 20 car race you should receive an update for each vehicle at least once per second.
+# Session History Packet
 
-Note that at the end of the race, after the final classification packet has been sent, a final bulk update of all the session histories for the vehicles in that session will be sent.
+>This packet contains lap times and tyre usage for the session. This packet works slightly differently to other packets. To reduce CPU and bandwidth, each packet relates to a specific vehicle and is sent every 1/20 s, and the vehicle being sent is cycled through. Therefore in a 20 car race you should receive an update for each vehicle at least once per second.
+
+>Note that at the end of the race, after the final classification packet has been sent, a final bulk update of all the session histories for the vehicles in that session will be sent.
  
-Frequency: 20 per second but cycling through cars
-Size: 1155 bytes
-Version: 1
+>Frequency: 20 per second but cycling through cars
+
+>Size: 1155 bytes
+
+>Version: 1
+
+
+```cpp
+
 
 struct LapHistoryData
 {
@@ -769,20 +824,22 @@ struct PacketSessionHistoryData
     LapHistoryData          m_lapHistoryData[100];	// 100 laps of data max
     TyreStintHistoryData    m_tyreStintsHistoryData[8];
 };
-
-Restricted data (Your Telemetry setting)
+```
 
-There is some data in the UDP that you may not want other players seeing if you are in a multiplayer game. This is controlled by the “Your Telemetry” setting in the Telemetry options. The options are:
+# Restricted data (Your Telemetry setting)
+
+> There is some data in the UDP that you may not want other players seeing if you are in a multiplayer game. This is controlled by the “Your Telemetry” setting in the Telemetry options. The options are:
 
 	•	Restricted (Default) – other players viewing the UDP data will not see values for your car
 	•	Public – all other players can see all the data for your car
 	•	Show online ID – this additional option allows other players to view your online ID / gamertag in their UDP output.
 
-Note: You can always see the data for the car you are driving regardless of the setting.
+> Note: You can always see the data for the car you are driving regardless of the setting.
 
-The following data items are set to zero if the player driving the car in question has their “Your Telemetry” set to “Restricted”:
+> The following data items are set to zero if the player driving the car in question has their “Your Telemetry” 
+ set to “Restricted”:
 
-Car status packet
+## Car status packet
 
 	•	m_fuelInTank
 	•	m_fuelCapacity
@@ -795,7 +852,7 @@ Car status packet
 	•	m_ersHarvestedThisLapMGUK
 	•	m_ersHarvestedThisLapMGUH
 
-Car damage packet
+## Car damage packet
 
 	•	m_frontLeftWingDamage
 	•	m_frontRightWingDamage
@@ -816,21 +873,23 @@ Car damage packet
 	•	m_engineMGUKWear
 	•	m_engineTCWear
 
-To allow other players to view your online ID in their UDP output during an online session, you must enable the “Show online ID / gamertags” option. Selecting this will bring up a confirmation box that must be confirmed before this option is enabled. 
+> To allow other players to view your online ID in their UDP output during an online session, you must enable the “Show online ID / gamertags” option. Selecting this will bring up a confirmation box that must be confirmed before this option is enabled. 
 
-Please note that all options can be changed during a game session and will take immediate effect.
+> Please note that all options can be changed during a game session and will take immediate effect.
 
 
-FAQS
+# FAQS
 
-How do I enable the UDP Telemetry Output?
-In F1 22, UDP telemetry output is controlled via the in-game menus. To enable this, enter the options menu from the main menu (triangle / Y), then enter the settings menu - the UDP option will be at the bottom of the list. From there you will be able to enable / disable the UDP output, configure the IP address and port for the receiving application, toggle broadcast mode and set the send rate. Broadcast mode transmits the data across the network subnet to allow multiple devices on the same subnet to be able to receive this information. When using broadcast mode it is not necessary to set a target IP address, just a target port for applications to listen on.
+## How do I enable the UDP Telemetry Output?
+>In F1 22, UDP telemetry output is controlled via the in-game menus. To enable this, enter the options menu from the main menu (triangle / Y), then enter the settings menu - the UDP option will be at the bottom of the list. From there you will be able to enable / disable the UDP output, configure the IP address and port for the receiving application, toggle broadcast mode and set the send rate. Broadcast mode transmits the data across the network subnet to allow multiple devices on the same subnet to be able to receive this information. When using broadcast mode it is not necessary to set a target IP address, just a target port for applications to listen on.
 
-Advanced PC Users: You can additionally edit the game’s configuration XML file to configure UDP output. The file is located here (after an initial boot of the game):
+## Advanced PC Users: You can additionally edit the game’s configuration XML file to configure UDP output. The file is located here (after an initial boot of the game):
 
-...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml
+```...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml```
 
 You should see the tag:
+
+```
 
 <motion>
   ...
@@ -838,11 +897,14 @@ You should see the tag:
 	  ...
 </motion>
 
-Here you can set the values manually. Note that any changes made within the game when it is running will overwrite any changes made manually. Note the enabled flag is now a state.
+````
+
+> Here you can set the values manually. Note that any changes made within the game when it is running will overwrite any changes made manually. Note the enabled flag is now a state.
 
 
-What has changed since last year?
-F1 22 sees the following changes to the UDP specification:
+## What has changed since last year?
+
+## F1 22 sees the following changes to the UDP specification:
 
 	•	Custom UDP actions have been added to the button array so you can assign up to 12 custom controller button to come through UDP
 	•	Personal best and rival car indices added to lap data for time trial
@@ -853,37 +915,39 @@ F1 22 sees the following changes to the UDP specification:
 	•	Player’s online name is now displayed in the Participant packet when enabled
 	•	Added ruleset, time of day and session length to the session packet
 
-What is the order of the wheel arrays?
-All wheel arrays are in the following order:
-
+##  What is the order of the wheel arrays?
+> All wheel arrays are in the following order:
+```
    0 – Rear Left (RL)
    1 – Rear Right (RR)
    2 – Front Left (FL)
    3 – Front Right (FR)
+```
+
+## Do the vehicle indices change?
+> During a session, each car is assigned a vehicle index. This will not change throughout the session and all the arrays that are sent use this vehicle index to dereference the correct piece of data.
 
 
-Do the vehicle indices change?
-During a session, each car is assigned a vehicle index. This will not change throughout the session and all the arrays that are sent use this vehicle index to dereference the correct piece of data.
-
-
-What encoding format is used?
-All values are encoded using Little Endian format.
+## What encoding format is used?
+> All values are encoded using Little Endian format.
  
 
-Are the data structures packed?
-Yes, all data is packed, there is no padding used.
+## Are the data structures packed?
+> Yes, all data is packed, there is no padding used.
 
 
-Will there always be 20 cars in the data structures?
-No, certain game modes or car classes allow 22 cars to be present on the grid. This means that all previous places where 20 cars were used, 22 is now the maximum. Note that if your UDP format is 2019, 2018 or legacy and you are in “My Team” career mode, no UDP output will be produced because of this limitation.
+## Will there always be 20 cars in the data structures?
+> No, certain game modes or car classes allow 22 cars to be present on the grid. This means that all previous places where 20 cars were used, 22 is now the maximum. Note that if your UDP format is 2019, 2018 or legacy and you are in “My Team” career mode, no UDP output will be produced because of this limitation.
 
-There is still the data item called m_numActiveCars in the participants packet which tells you how many cars are active in the race. However, you should check the individual result status of each car in the lap data to see if that car is actively providing data. If it is not “Invalid” or “Inactive” then the corresponding vehicle index has valid data.
+> There is still the data item called m_numActiveCars in the participants packet which tells you how many cars are active in the race. However, you should check the individual result status of each car in the lap data to see if that car is actively providing data. If it is not “Invalid” or “Inactive” then the corresponding vehicle index has valid data.
 
 
-How often are updated packets sent?
-For the packets which get updated at “Rate as specified in the menus” you can be guaranteed that on the frame that these get sent they will all get sent together and will never be separated across frames. This of course relies on the reliability of your network as to whether they are received correctly as everything is sent via UDP. Other packets that get sent at specific rates can arrive on any frame.
+## How often are updated packets sent?
+> For the packets which get updated at “Rate as specified in the menus” you can be guaranteed that on the frame that these get sent they will all get sent together and will never be separated across frames. This of course relies on the reliability of your network as to whether they are received correctly as everything is sent via UDP. Other packets that get sent at specific rates can arrive on any frame.
 If you are connected to the game when it starts transmitting the first frame will contain the following information to help initialise data structures on the receiving application:
-Packets sent on Frame 1: (All packets sent on this frame have “Session timestamp” 0.000)
+
+> Packets sent on Frame 1: (All packets sent on this frame have “Session timestamp” 0.000)
+
 	•	Session
 	•	Participants
 	•	Car Setups
@@ -892,14 +956,16 @@ Packets sent on Frame 1: (All packets sent on this frame have “Session timesta
 	•	Car Telemetry 
 	•	Car Status
 	•	Car Damage
-As an example, assuming that you are running at 60Hz with 60Hz update rate selected in the menus then you would expect to see the following packets and timestamps:
+> As an example, assuming that you are running at 60Hz with 60Hz update rate selected in the menus then you would expect to see the following packets and timestamps:
 Packets sent on Frame 2: (All packets sent on this frame have “Session timestamp” 0.016)
+
 	•	Lap Data
 	•	Motion Data
 	•	Car Telemetry
 	•	Car Status
 …
-Packets sent on Frame 31: (All packets sent on this frame have “Session timestamp” 0.5)
+> Packets sent on Frame 31: (All packets sent on this frame have “Session timestamp” 0.5)
+
 	•	Session (since 2 updates per second)
 	•	Car Setups (since 2 updates per second)
 	•	Lap Data
@@ -908,8 +974,8 @@ Packets sent on Frame 31: (All packets sent on this frame have “Session timest
 	•	Car Status
 	•	Car Damage (since 2 updates per second)
 
-Will my old app still work with F1 22?
-F1 22 uses a new format for the UDP data. However, earlier formats of the data are still supported so that most older apps implemented using the previous data formats should work with little or no change from the developer. To use the old formats, please enter the UDP options menu and set “UDP Format” to either “2021”, “2020”, “2019”, “2018” or “Legacy” (for F1 2017 and earlier). 
+## Will my old app still work with F1 22?
+> F1 22 uses a new format for the UDP data. However, earlier formats of the data are still supported so that most older apps implemented using the previous data formats should work with little or no change from the developer. To use the old formats, please enter the UDP options menu and set “UDP Format” to either “2021”, “2020”, “2019”, “2018” or “Legacy” (for F1 2017 and earlier). 
 Specifications for the olders formats can be seen here:
 
 	•	Legacy (2017 and earlier) - http://forums.codemasters.com/discussion/53139/f1-2017-d-box-and-udp-output-specification/p1.
@@ -918,211 +984,127 @@ Specifications for the olders formats can be seen here:
 	•	F1 2020 - https://forums.codemasters.com/topic/54423-f1%C2%AE-2020-udp-specification/ 
 	•	F1 2021 - https://forums.codemasters.com/topic/80231-f1-2021-udp-specification
 
-How do I enable D-BOX output?
-D-BOX output is currently supported on the PC platform. In F1 22, the D-BOX activation can be controlled via the menus. Navigate to Game Options->Settings->UDP Telemetry Settings->D-BOX to activate this on your system.
+## How do I enable D-BOX output?
+> D-BOX output is currently supported on the PC platform. In F1 22, the D-BOX activation can be controlled via the menus. Navigate to Game Options->Settings->UDP Telemetry Settings->D-BOX to activate this on your system.
 
-Advanced PC Users: It is possible to control D-BOX by editing the games’ configuration XML file. The file is located here (after an initial boot of the game):
+> Advanced PC Users: It is possible to control D-BOX by editing the games’ configuration XML file. The file is located here (after an initial boot of the game):
 
-...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml
+```...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml```
 
-You should see the tag:
+> You should see the tag:
 
+```
   <motion>
     <dbox enabled="false" />
     ...
   </motion>
+  ```
 
-Set the “enabled” value to “true” to allow the game to output to your D-BOX motion platform. Note that any changes made within the game when it is running will overwrite any changes made manually.
+> Set the “enabled” value to “true” to allow the game to output to your D-BOX motion platform. Note that any changes made within the game when it is running will overwrite any changes made manually.
 
 
-How can I disable in-game support for LED device?
-The F1 game has native support for some of the basic features supported by some external LED devices, such as the Leo Bodnar SLI Pro and the Fanatec steering wheels. To avoid conflicts between the game’s implementation and any third-party device managers on the PC platform it may be necessary to disable the native support. This is done using the following led_display flags in the hardware_settings_config.xml. The file is located here (after an initial boot of the game):
+## How can I disable in-game support for LED device?
+>The F1 game has native support for some of the basic features supported by some external LED devices, such as the Leo Bodnar SLI Pro and the Fanatec steering wheels. To avoid conflicts between the game’s implementation and any third-party device managers on the PC platform it may be necessary to disable the native support. This is done using the following led_display flags in the hardware_settings_config.xml. The file is located here (after an initial boot of the game):
 
-...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml
+```...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml```
 
-The flags to enabled/disable LED output are:
+> The flags to enabled/disable LED output are:
 
+```
 <led_display fanatecNativeSupport="true" sliProNativeSupport="true" />
-
-The sliProNativeSupport flag controls the output to SLI Pro devices. The fanatecNativeSupport flag controls the output to Fanatec (and some related) steering wheel LEDs. Set the values for any of these to “false” to disable them and avoid conflicts with your own device manager.
-
-Please note there is an additional flag to manually control the LED brightness on the SLI Pro:
-
-<led_display sliProForceBrightness="127" />
-
-This option (using value in the range 0-255) will be ignored when setting the sliProNativeSupport flag to “false”.
-
-Also note it is now possible to edit these values on the fly via the Game Options->Settings->UDP Telemetry Settings menu.
+```
 
 
-Can I configure the UDP output using an XML File?
-PC users can edit the game’s configuration XML file to configure UDP output. The file is located here (after an initial boot of the game):
+>The sliProNativeSupport flag controls the output to SLI Pro devices. The fanatecNativeSupport flag controls the output to Fanatec (and some related) steering wheel LEDs. Set the values for any of these to “false” to disable them and avoid conflicts with your own device manager.
 
-    	...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml
+>Please note there is an additional flag to manually control the LED brightness on the SLI Pro:
 
-You should see the tag:
+```<led_display sliProForceBrightness="127" />```
 
+> This option (using value in the range 0-255) will be ignored when setting the sliProNativeSupport flag to “false”.
+
+> Also note it is now possible to edit these values on the fly via the Game Options->Settings->UDP Telemetry Settings menu.
+
+
+## Can I configure the UDP output using an XML File?
+>PC users can edit the game’s configuration XML file to configure UDP output. The file is located here (after an initial boot of the game):
+
+ ```   	...\Documents\My Games\<game_folder>\hardwaresettings\hardware_settings_config.xml```
+
+>You should see the tag:
+
+```
    <motion>
      ...
      <udp enabled="false" broadcast=”false” ip="127.0.0.1" port="20777" sendRate=”20” format=”2022” yourTelemetry="restricted" />
      ...
    </motion>
+   ```
 
-Here you can set the values manually. Note that any changes made within the game when it is running will overwrite any changes made manually.
-
-Appendices
+> Here you can set the values manually. Note that any changes made within the game when it is running will overwrite any changes made manually.
+
+
+----
+
+
+
+# Appendices
 
 Here are the ID values used for different game data.
 
-Track IDs
-
-ID
-Track
-0
-Melbourne
-1
-Paul Ricard
-2
-Shanghai
-3
-Sakhir (Bahrain)
-4
-Catalunya
-5
-Monaco
-6
-Montreal
-7
-Silverstone
-8
-Hockenheim
-9
-Hungaroring
-10
-Spa
-11
-Monza
-12
-Singapore
-13
-Suzuka
-14
-Abu Dhabi
-15
-Texas
-16
-Brazil
-17
-Austria
-18
-Sochi
-19
-Mexico
-20
-Baku (Azerbaijan)
-21
-Sakhir Short
-22
-Silverstone Short
-23
-Texas Short
-24
-Suzuka Short
-25
-Hanoi
-26
-Zandvoort
-27
-Imola
-28
-Portimão
-29
-Jeddah
-30
-Miami
+## Track IDs
 
 
-
-Nationality IDs
+| ID| Track |
+|-|-|
+|0|Melbourne|
+1 |Paul Ricard
+2|Shanghai
+3|Sakhir (Bahrain)
+4|Catalunya
+5|Monaco
+6|Montreal
+7|Silverstone
+8|Hockenheim
+9|Hungaroring
+10|Spa
+11|Monza
+12|Singapore
+13|Suzuka
+14|Abu Dhabi
+15|Texas
+16|Brazil
+17|Austria
+18|Sochi
+19|Mexico
+20|Baku (Azerbaijan)
+21|Sakhir Short
+22|Silverstone Short
+23|Texas Short
+24|Suzuka Short
+25|Hanoi
+26|Zandvoort
+27|Imola
+28|Portimão
+29|Jeddah
+30|Miami
 
-ID
-Nationality
-ID
-Nationality
-ID
-Nationality
-1
-American
-31
-Greek
-61
-Paraguayan
-2
-Argentinean
-32
-Guatemalan
-62
-Peruvian
-3
-Australian
-33
-Honduran
-63
-Polish
-4
-Austrian
-34
-Hong Konger
-64
-Portuguese
-5
-Azerbaijani
-35
-Hungarian
-65
-Qatari
-6
-Bahraini
-36
-Icelander
-66
-Romanian
-7
-Belgian
-37
-Indian
-67
-Russian
-8
-Bolivian
-38
-Indonesian
-68
-Salvadoran
-9
-Brazilian
-39
-Irish
-69
-Saudi
-10
-British
-40
-Israeli
-70
-Scottish
-11
-Bulgarian
-41
-Italian
-71
-Serbian
-12
-Cameroonian
-42
-Jamaican
-72
-Singaporean
+## Nationality IDs
+
+|ID|Nationality|ID|Nationality|ID|Nationality|
+|--|-|-|-|-|-|
+1|American|31|Greek|61|Paraguayan
+2|Argentinean|32|Guatemalan|62|Peruvian
+3|Australian|33|Honduran|63|Polish
+4|Austrian|34|Hong Konger|64|Portuguese
+5|Azerbaijani|35|Hungarian|65|Qatari
+6|Bahraini|36|Icelander|66|Romanian
+7 |Belgian |37 |Indian |67 |Russian
+8|Bolivian|38|Indonesian|68|Salvadoran
+9|Brazilian|39|Irish|69|Saudi
+10|British|40|Israeli|70|Scottish
+11|Bulgarian|41|Italian|71|Serbian
+12|Cameroonian|42|Jamaican|72|Singaporean
 13
 Canadian
 43
@@ -1234,10 +1216,10 @@ Panamanian
 
 
 
-Game Mode IDs
+## Game Mode IDs
 
-ID
-Team
+|ID|Team|
+|-|-|
 0
 Event Mode
 3
@@ -1267,10 +1249,10 @@ Career ’22 Online
 127
 Benchmark
 
-Ruleset IDs
+# Ruleset IDs
 
-ID
-Team
+|ID|Team|
+|-|-|
 0
 Practice & Qualifying
 1
@@ -1290,12 +1272,12 @@ Average Speed Zone
 11
 Rival Duel
 
-Surface types
+# Surface types
 
-These types are from physics data and show what type of contact each wheel is experiencing.
+> These types are from physics data and show what type of contact each wheel is experiencing.
 
-ID
-Surface
+|ID|Surface|
+|-|-|
 0
 Tarmac
 1
@@ -1321,12 +1303,12 @@ Metal
 11
 Ridged
 
-Button flags
+# Button flags
 
-These flags are used in the telemetry packet to determine if any buttons are being held on the controlling device. If the value below logical ANDed with the button status is set then the corresponding button is being held.
+> These flags are used in the telemetry packet to determine if any buttons are being held on the controlling device. If the value below logical ANDed with the button status is set then the corresponding button is being held.
 
-Bit Flag
-Button
+|Bit Flag|Button|
+|-|-|
 0x00000001
 Cross or A
 0x00000002
@@ -1392,10 +1374,10 @@ UDP Action 11
 0x80000000
 UDP Action 12
 
-Penalty types
+# Penalty types
 
-ID
-Penalty meaning
+|ID|Penalty meaning|
+|-|-|
 0
 Drive through
 1
@@ -1434,10 +1416,10 @@ Retired
 Black flag timer
 
 
-Infringement types
+# Infringement types
 
-ID
-Infringement meaning
+|ID|Infringement meaning|
+|-|-|
 0
 Blocking by slow driving
 1
@@ -1544,13 +1526,11 @@ Illegal time gain
 Mandatory pitstop
                 
 
-Legal Notice
+# Legal Notice
 
-
+```
 F1 22 Game - an official product of the FIA FORMULA ONE WORLD CHAMPIONSHIP. © 2022 The Codemasters Software Company Limited ("Codemasters"). All rights reserved. "Codemasters”®, “Ego”® and the Codemasters logo are registered trademarks owned by Codemasters. “Codemasters Racing”™ is a trade mark of Codemasters.
 The F1 FORMULA 1 logo, F1 logo, F1 FIA FORMULA 1 WORLD CHAMPIONSHIP logo, FORMULA 1, FORMULA ONE, F1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trademarks of Formula One Licensing BV, a Formula One group company. Licensed by Formula One World Championship Limited. All rights reserved.
 All other copyrights or trademarks are the property of their respective owners and are being used under license. Unauthorised copying, adaptation, rental, lending, re-sale, arcade use, charging for use, broadcast, cable transmission, public performance, distribution or extraction of this product or any trade mark or copyright work that forms part of this product is prohibited. Developed and published by Codemasters.
-
----===END OF DOCUMENT===---
-
+```
 
