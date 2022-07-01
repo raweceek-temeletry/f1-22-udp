@@ -1,6 +1,6 @@
 {
   "name": "f1-22-udp",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "build/src/F1_22_UDP.js",
   "types": "build/src/F1_22_UDP.d.ts",
   "files": [
@@ -37,7 +37,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "start": "npm run build && node build/dev/index.js",
+    "start": "npm run build && node build/dev/dev.js",
     "build": "tsc",
     "build:dev": "tsc --watch",
     "build-prod": "tsc && npm run uglify",
