@@ -1528,9 +1528,10 @@ Mandatory pitstop
 
 # Legal Notice
 
-```
-F1 22 Game - an official product of the FIA FORMULA ONE WORLD CHAMPIONSHIP. © 2022 The Codemasters Software Company Limited ("Codemasters"). All rights reserved. "Codemasters”®, “Ego”® and the Codemasters logo are registered trademarks owned by Codemasters. “Codemasters Racing”™ is a trade mark of Codemasters.
-The F1 FORMULA 1 logo, F1 logo, F1 FIA FORMULA 1 WORLD CHAMPIONSHIP logo, FORMULA 1, FORMULA ONE, F1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trademarks of Formula One Licensing BV, a Formula One group company. Licensed by Formula One World Championship Limited. All rights reserved.
-All other copyrights or trademarks are the property of their respective owners and are being used under license. Unauthorised copying, adaptation, rental, lending, re-sale, arcade use, charging for use, broadcast, cable transmission, public performance, distribution or extraction of this product or any trade mark or copyright work that forms part of this product is prohibited. Developed and published by Codemasters.
-```
+
+- F1 22 Game - an official product of the FIA FORMULA ONE WORLD CHAMPIONSHIP. © 2022 The Codemasters Software Company Limited ("Codemasters"). All rights reserved. "Codemasters”®, “Ego”® and the Codemasters logo are registered trademarks owned by Codemasters. “Codemasters Racing”™ is a trade mark of Codemasters.
+
+- The F1 FORMULA 1 logo, F1 logo, F1 FIA FORMULA 1 WORLD CHAMPIONSHIP logo, FORMULA 1, FORMULA ONE, F1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trademarks of Formula One Licensing BV, a Formula One group company. Licensed by Formula One World Championship Limited. All rights reserved.
+
+- All other copyrights or trademarks are the property of their respective owners and are being used under license. Unauthorised copying, adaptation, rental, lending, re-sale, arcade use, charging for use, broadcast, cable transmission, public performance, distribution or extraction of this product or any trade mark or copyright work that forms part of this product is prohibited. Developed and published by Codemasters.
 
