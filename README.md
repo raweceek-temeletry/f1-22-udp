@@ -39,20 +39,45 @@ npm install f1-22-udp
 
 
 ## Usage
+### typescript with imports
+
 
 ```ts
 import { F122UDP } from "f1-22-udp";
 /*
 *   'port' is optional, defaults to 20777
-*   'address' is optional, defaults to localhost
+*   'address' is optional, defaults to localhost, in certain cases you may need to set address explicitly
 */
 
 const f122: F122UDP = new F122UDP();
 f122.start();
 // motion 0
-client.on('motion',function(data) {
+f122.on('motion',function(data) {
     console.log(data);
 })
+```
+
+### CommonJS 
+
+```js
+const { F122UDP } = require("f1-22-udp")
+/*
+*   'port' is optional, defaults to 20777
+*   'address' is optional, defaults to localhost, in certain cases you may need to set address explicitly
+*/
+
+const f122 = new F122UDP()
+f122.start();
+// motion 0
+f122.on('motion', function (data) {
+    console.log(data);
+})
+
+f122.on("event", data => {
+    console.log(data);
+}) 
+
+
 ```
 
 ![](./usage.png)
