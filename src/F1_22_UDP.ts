@@ -246,9 +246,9 @@ export class F122UDP extends EventEmitter {
             break;
           }
 
-          case packetSize.Finallassification: {
+          case packetSize.FinalClassification: {
             const {data} = new PacketFinalClassificationDataParser(msg);
-            this.emit('finallassification', data);
+            this.emit('finalClassification', data);
             break;
           }
 
