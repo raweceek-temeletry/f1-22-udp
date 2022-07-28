@@ -1077,9 +1077,38 @@ Specifications for the olders formats can be seen here:
 
 Here are the ID values used for different game data.
 
+## Team IDs
+| ID| Team | ID| Team |
+|-|-|-|-|
+0|Mercedes|101|McLaren Artura
+1|Ferrari|102|Mercedes AMG GT Black Series Safety Car
+2|Red Bull Racing|103|Mercedes AMG GTR Pro
+3|Williams|104|F1 Custom Team
+4|Aston Martin|106|Prema ‘21
+5|Alpine|107|Uni-Virtuosi ‘21
+6|Alpha Tauri|108|Carlin ‘21
+7|Haas|109|Hitech ‘21
+8|McLaren|110|Art GP ‘21
+9|Alfa Romeo|111|MP Motorsport ‘21
+85|Mercedes 2020|112|Charouz ‘21
+86|Ferrari 2020|113|Dams ‘21
+87|Red Bull 2020|114|Campos ‘21
+88|Williams 2020|115|BWT ‘21
+89|Racing Point 2020|116|Trident ‘21
+90|Renault 2020|117|Mercedes AMG GT Black Series
+91|Alpha Tauri 2020
+92|Haas 2020
+93|McLaren 2020
+94|Alfa Romeo 2020
+95|Aston Martin DB11 V12
+96|Aston Martin Vantage F1 Edition
+97|Aston Martin Vantage Safety Car
+98|Ferrari F8 Tributo
+99|Ferrari Roma
+100|McLaren 720S
+
+
 ## Track IDs
-
-
 | ID| Track |
 |-|-|
 |0|Melbourne|
