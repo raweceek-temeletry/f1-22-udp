@@ -1077,9 +1077,83 @@ Specifications for the olders formats can be seen here:
 
 Here are the ID values used for different game data.
 
+## Team IDs
+| ID| Team | ID| Team |
+|-|-|-|-|
+0|Mercedes|101|McLaren Artura
+1|Ferrari|102|Mercedes AMG GT Black Series Safety Car
+2|Red Bull Racing|103|Mercedes AMG GTR Pro
+3|Williams|104|F1 Custom Team
+4|Aston Martin|106|Prema ‘21
+5|Alpine|107|Uni-Virtuosi ‘21
+6|Alpha Tauri|108|Carlin ‘21
+7|Haas|109|Hitech ‘21
+8|McLaren|110|Art GP ‘21
+9|Alfa Romeo|111|MP Motorsport ‘21
+85|Mercedes 2020|112|Charouz ‘21
+86|Ferrari 2020|113|Dams ‘21
+87|Red Bull 2020|114|Campos ‘21
+88|Williams 2020|115|BWT ‘21
+89|Racing Point 2020|116|Trident ‘21
+90|Renault 2020|117|Mercedes AMG GT Black Series
+91|Alpha Tauri 2020
+92|Haas 2020
+93|McLaren 2020
+94|Alfa Romeo 2020
+95|Aston Martin DB11 V12
+96|Aston Martin Vantage F1 Edition
+97|Aston Martin Vantage Safety Car
+98|Ferrari F8 Tributo
+99|Ferrari Roma
+100|McLaren 720S
+
+
+## Driver IDs
+| ID| Driver | ID| Driver | ID| Driver|
+|-|-|-|-|-|-|
+0|Carlos Sainz|45|Artem Markelov|88|Guiliano Alesi
+1|Daniil Kvyat|46|Tadasuke Makino|89|Ralph Boschung
+2|Daniel Ricciardo|47|Sean Gelael|90|Michael Schumacher
+3|Fernando Alonso|48|Nyck De Vries|91|Dan Ticktum
+4|Felipe Massa|49|Jack Aitken|92 |Marcus Armstrong
+6|Kimi Räikkönen|50|George Russell|93 |Christian Lundgaard
+7|Lewis Hamilton|51|Maximilian Günther|94 |Yuki Tsunoda
+9|Max Verstappen|52|Nirei Fukuzumi|95 |Jehan Daruvala
+10|Nico Hulkenburg|53|Luca Ghiotto|96 |Gulherme Samaia
+11|Kevin Magnussen|54|Lando Norris|97 |Pedro Piquet
+12|Romain Grosjean|55|Sérgio Sette Câmara|98 |Felipe Drugovich
+13|Sebastian Vettel|56|Louis Delétraz|99 |Robert Schwartzman
+14|Sergio Perez|57|Antonio Fuoco|100 |Roy Nissany
+15|Valtteri Bottas|58|Charles Leclerc|101 |Marino Sato
+17|Esteban Ocon|59|Pierre Gasly|102|Aidan Jackson
+19|Lance Stroll|62|Alexander Albon|103|Casper Akkerman
+20|Arron Barnes|63|Nicholas Latifi|109|Jenson Button
+21|Martin Giles|64|Dorian Boccolacci|110|David Coulthard
+22|Alex Murray|65|Niko Kari|111|Nico Rosberg
+23|Lucas Roth|66|Roberto Merhi|112|Oscar Piastri
+24|Igor Correia|67|Arjun Maini|113|Liam Lawson
+25|Sophie Levasseur|68|Alessio Lorandi|114|Juri Vips
+26|Jonas Schiffer|69|Ruben Meijer|115|Theo Pourchaire
+27|Alain Forest|70|Rashid Nair|116|Richard Verschoor
+28|Jay Letourneau|71|Jack Tremblay|117|Lirim Zendeli
+29|Esto Saari|72|Devon Butler|118|David Beckmann
+30|Yasar Atiyeh|73|Lukas Weber|121|Alessio Deledda
+31|Callisto Calabresi|74|Antonio Giovinazzi|122|Bent Viscaal
+32|Naota Izum|75|Robert Kubica|123|Enzo Fittipaldi
+33|Howard Clarke|76|Alain Prost|125|Mark Webber
+34|Wilheim Kaufmann|77|Ayrton Senna|126|Jacques Villeneuve
+35|Marie Laursen|78|Nobuharu Matsushita
+36|Flavio Nieves|79|Nikita Mazepin
+37|Peter Belousov|80|Guanya Zhou
+38|Klimek Michalski|81|Mick Schumacher
+39|Santiago Moreno|82|Callum Ilott
+40|Benjamin Coppens|83|Juan Manuel Correa
+41|Noah Visser|84|Jordan King
+42|Gert Waldmuller|85|Mahaveer Raghunathan
+43|Julian Quesada|86|Tatiana Calderon
+44|Daniel Jones|87|Anthoine Hubert
+
 ## Track IDs
-
-
 | ID| Track |
 |-|-|
 |0|Melbourne|
@@ -1130,172 +1204,56 @@ Here are the ID values used for different game data.
 10|British|40|Israeli|70|Scottish
 11|Bulgarian|41|Italian|71|Serbian
 12|Cameroonian|42|Jamaican|72|Singaporean
-13
-Canadian
-43
-Japanese
-73
-Slovakian
-14
-Chilean
-44
-Jordanian
-74
-Slovenian
-15
-Chinese
-45
-Kuwaiti
-75
-South Korean
-16
-Colombian
-46
-Latvian
-76
-South African
-17
-Costa Rican
-47
-Lebanese
-77
-Spanish
-18
-Croatian
-48
-Lithuanian
-78
-Swedish
-19
-Cypriot
-49
-Luxembourger
-79
-Swiss
-20
-Czech
-50
-Malaysian
-80
-Thai
-21
-Danish
-51
-Maltese
-81
-Turkish
-22
-Dutch
-52
-Mexican
-82
-Uruguayan
-23
-Ecuadorian
-53
-Monegasque
-83
-Ukrainian
-24
-English
-54
-New Zealander
-84
-Venezuelan
-25
-Emirian
-55
-Nicaraguan
-85
-Barbadian
-26
-Estonian
-56
-Northern Irish
-86
-Welsh
-27
-Finnish
-57
-Norwegian
-87
-Vietnamese
-28
-French
-58
-Omani
-
-
-29
-German
-59
-Pakistani
- 
- 
-30
-Ghanaian
-60
-Panamanian
- 
- 
-
-
+13|Canadian|43|Japanese|73|Slovakian 
+14|Chilean|44|Jordanian|74|Slovenian 
+15|Chinese|45|Kuwaiti|75|South Korean 
+16|Colombian|46|Latvian|76|South African 
+17|Costa Rican|47|Lebanese|77|Spanish 
+18|Croatian|48|Lithuanian|78|Swedish 
+19|Cypriot|49|Luxembourger|79|Swiss 
+20|Czech|50|Malaysian|80|Thai 
+21|Danish|51|Maltese|81|Turkish 
+22|Dutch|52|Mexican|82|Uruguayan 
+23|Ecuadorian|53|Monegasque|83|Ukrainian 
+24|English|54|New Zealander|84|Venezuelan 
+25|Emirian|55|Nicaraguan|85|Barbadian 
+26|Estonian|56|Northern Irish|86|Welsh 
+27|Finnish|57|Norwegian|87|Vietnamese 
+28|French|58|Omani|29|German 
+59|Pakistani|30|Ghanaian|60|Panamanian 
 
 ## Game Mode IDs
 
 |ID|Team|
 |-|-|
-0
-Event Mode
-3
-Grand Prix
-5
-Time Trial
-6
-Splitscreen
-7
-Online Custom
-8
-Online League
-11
-Career Invitational
-12
-Championship Invitational
-13
-Championship
-14
-Online Championship
-15
-Online Weekly Event
-19
-Career ‘22
-20
-Career ’22 Online
-127
-Benchmark
+0|Event Mode 
+3|Grand Prix 
+5|Time Trial 
+6|Splitscreen 
+7|Online Custom 
+8|Online League 
+11|Career Invitational 
+12|Championship Invitational 
+13|Championship 
+14|Online Championship 
+15|Online Weekly Event 
+19|Career ‘22 
+20|Career ’22 Online 
+127|Benchmark 
 
 # Ruleset IDs
 
 |ID|Team|
 |-|-|
-0
-Practice & Qualifying
-1
-Race
-2
-Time Trial
-4
-Time Attack
-6
-Checkpoint Challenge
-8
-Autocross
-9
-Drift
-10
-Average Speed Zone
-11
-Rival Duel
+0|Practice & Qualifying 
+1|Race 
+2|Time Trial 
+4|Time Attack 
+6|Checkpoint Challenge 
+8|Autocross 
+9|Drift 
+10|Average Speed Zone 
+11|Rival Duel 
 
 # Surface types
 
@@ -1303,30 +1261,18 @@ Rival Duel
 
 |ID|Surface|
 |-|-|
-0
-Tarmac
-1
-Rumble strip
-2
-Concrete
-3
-Rock
-4
-Gravel
-5
-Mud
-6
-Sand
-7
-Grass
-8
-Water
-9
-Cobblestone
-10
-Metal
-11
-Ridged
+0|Tarmac
+1|Rumble strip
+2|Concrete
+3|Rock
+4|Gravel
+5|Mud
+6|Sand
+7|Grass
+8|Water
+9|Cobblestone
+10|Metal
+11|Ridged
 
 # Button flags
 
@@ -1334,222 +1280,118 @@ Ridged
 
 |Bit Flag|Button|
 |-|-|
-0x00000001
-Cross or A
-0x00000002
-Triangle or Y
-0x00000004
-Circle or B
-0x00000008
-Square or X
-0x00000010
-D-pad Left
-0x00000020
-D-pad Right
-0x00000040
-D-pad Up
-0x00000080
-D-pad Down
-0x00000100
-Options or Menu
-0x00000200
-L1 or LB
-0x00000400
-R1 or RB
-0x00000800
-L2 or LT
-0x00001000
-R2 or RT
-0x00002000
-Left Stick Click
-0x00004000
-Right Stick Click
-0x00008000
-Right Stick Left
-0x00010000
-Right Stick Right
-0x00020000
-Right Stick Up
-0x00040000
-Right Stick Down
-0x00080000
-Special
-0x00100000
-UDP Action 1
-0x00200000
-UDP Action 2
-0x00400000
-UDP Action 3
-0x00800000
-UDP Action 4
-0x01000000
-UDP Action 5
-0x02000000
-UDP Action 6
-0x04000000
-UDP Action 7
-0x08000000
-UDP Action 8
-0x10000000
-UDP Action 9
-0x20000000
-UDP Action 10
-0x40000000
-UDP Action 11
-0x80000000
-UDP Action 12
+0x00000001|Cross or A 
+0x00000002|Triangle or Y 
+0x00000004|Circle or B 
+0x00000008|Square or X 
+0x00000010|D-pad Left 
+0x00000020|D-pad Right 
+0x00000040|D-pad Up 
+0x00000080|D-pad Down 
+0x00000100|Options or Menu 
+0x00000200|L1 or LB 
+0x00000400|R1 or RB 
+0x00000800|L2 or LT 
+0x00001000|R2 or RT 
+0x00002000|Left Stick Click 
+0x00004000|Right Stick Click 
+0x00008000|Right Stick Left 
+0x00010000|Right Stick Right 
+0x00020000|Right Stick Up 
+0x00040000|Right Stick Down 
+0x00080000|Special 
+0x00100000|UDP Action 1 
+0x00200000|UDP Action 2 
+0x00400000|UDP Action 3 
+0x00800000|UDP Action 4 
+0x01000000|UDP Action 5 
+0x02000000|UDP Action 6 
+0x04000000|UDP Action 7 
+0x08000000|UDP Action 8 
+0x10000000|UDP Action 9 
+0x20000000|UDP Action 10 
+0x40000000|UDP Action 11 
+0x80000000|UDP Action 12 
 
 # Penalty types
 
 |ID|Penalty meaning|
 |-|-|
-0
-Drive through
-1
-Stop Go
-2
-Grid penalty
-3
-Penalty reminder
-4
-Time penalty
-5
-Warning
-6
-Disqualified
-7
-Removed from formation lap
-8
-Parked too long timer
-9
-Tyre regulations
-10
-This lap invalidated
-11
-This and next lap invalidated
-12
-This lap invalidated without reason
-13
-This and next lap invalidated without reason
-14
-This and previous lap invalidated
-15
-This and previous lap invalidated without reason
-16
-Retired
-17
-Black flag timer
-
+0|Drive through 
+1|Stop Go 
+2|Grid penalty 
+3|Penalty reminder 
+4|Time penalty 
+5|Warning 
+6|Disqualified 
+7|Removed from formation lap 
+8|Parked too long timer 
+9|Tyre regulations 
+10|This lap invalidated 
+11|This and next lap invalidated 
+12|This lap invalidated without reason 
+13|This and next lap invalidated without reason 
+14|This and previous lap invalidated 
+15|This and previous lap invalidated without reason 
+16|Retired 
+17|Black flag timer 
 
 # Infringement types
 
 |ID|Infringement meaning|
 |-|-|
-0
-Blocking by slow driving
-1
-Blocking by wrong way driving
-2
-Reversing off the start line
-3
-Big Collision
-4
-Small Collision
-5
-Collision failed to hand back position single
-6
-Collision failed to hand back position multiple
-7
-Corner cutting gained time
-8
-Corner cutting overtake single
-9
-Corner cutting overtake multiple
-10
-Crossed pit exit lane
-11
-Ignoring blue flags
-12
-Ignoring yellow flags
-13
-Ignoring drive through
-14
-Too many drive throughs
-15
-Drive through reminder serve within n laps
-16
-Drive through reminder serve this lap
-17
-Pit lane speeding
-18
-Parked for too long
-19
-Ignoring tyre regulations
-20
-Too many penalties
-21
-Multiple warnings
-22
-Approaching disqualification
-23
-Tyre regulations select single
-24
-Tyre regulations select multiple
-25
-Lap invalidated corner cutting
-26
-Lap invalidated running wide
-27
-Corner cutting ran wide gained time minor
-28
-Corner cutting ran wide gained time significant
-29
-Corner cutting ran wide gained time extreme
-30
-Lap invalidated wall riding
-31
-Lap invalidated flashback used
-32
-Lap invalidated reset to track
-33
-Blocking the pitlane
-34
-Jump start
-35
-Safety car to car collision
-36
-Safety car illegal overtake
-37
-Safety car exceeding allowed pace
-38
-Virtual safety car exceeding allowed pace
-39
-Formation lap below allowed speed
-40
-Retired mechanical failure
-41
-Retired terminally damaged
-42
-Safety car falling too far back
-43
-Black flag timer
-44
-Unserved stop go penalty
-45
-Unserved drive through penalty
-46
-Engine component change
-47
-Gearbox change
-48
-League grid penalty
-49
-Retry penalty
-50
-Illegal time gain
-51
-Mandatory pitstop
-                
+0|Blocking by slow driving 
+1|Blocking by wrong way driving 
+2|Reversing off the start line 
+3|Big Collision 
+4|Small Collision 
+5|Collision failed to hand back position single 
+6|Collision failed to hand back position multiple 
+7|Corner cutting gained time 
+8|Corner cutting overtake single 
+9|Corner cutting overtake multiple 
+10|Crossed pit exit lane 
+11|Ignoring blue flags 
+12|Ignoring yellow flags 
+13|Ignoring drive through 
+14|Too many drive throughs 
+15|Drive through reminder serve within n laps 
+16|Drive through reminder serve this lap 
+17|Pit lane speeding 
+18|Parked for too long 
+19|Ignoring tyre regulations 
+20|Too many penalties 
+21|Multiple warnings 
+22|Approaching disqualification 
+23|Tyre regulations select single 
+24|Tyre regulations select multiple 
+25|Lap invalidated corner cutting 
+26|Lap invalidated running wide 
+27|Corner cutting ran wide gained time minor 
+28|Corner cutting ran wide gained time significant 
+29|Corner cutting ran wide gained time extreme 
+30|Lap invalidated wall riding 
+31|Lap invalidated flashback used 
+32|Lap invalidated reset to track 
+33|Blocking the pitlane 
+34|Jump start 
+35|Safety car to car collision 
+36|Safety car illegal overtake 
+37|Safety car exceeding allowed pace 
+38|Virtual safety car exceeding allowed pace 
+39|Formation lap below allowed speed 
+40|Retired mechanical failure 
+41|Retired terminally damaged 
+42|Safety car falling too far back 
+43|Black flag timer 
+44|Unserved stop go penalty 
+45|Unserved drive through penalty 
+46|Engine component change 
+47|Gearbox change 
+48|League grid penalty 
+49|Retry penalty 
+50|Illegal time gain 
+51|Mandatory pitstop 
 
 # Legal Notice
 
