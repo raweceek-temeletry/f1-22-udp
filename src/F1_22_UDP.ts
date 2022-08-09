@@ -209,7 +209,7 @@ export class F122UDP extends EventEmitter {
             break;
           case packetSize.LapData: {
             const {data} = new PacketLapDataParser(msg);
-            this.emit('lap', data);
+            this.emit('lapData', data);
 
             break;
           }
