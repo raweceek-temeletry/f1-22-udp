@@ -1,5 +1,5 @@
 import {PacketCarStatusDataParser} from './parsers/CarStatus/parsers';
-import {createSocket,RemoteInfo,Socket} from 'node:dgram';
+import {createSocket, RemoteInfo, Socket} from 'node:dgram';
 import {EventEmitter} from 'node:stream';
 import {packetSize} from './constants';
 import {PacketCarSetupDataParser} from './parsers/CarSetup/parsers';
@@ -28,7 +28,7 @@ import {PacketLobbyInfoData} from 'lobby/types';
 import {PacketParticipantsData} from 'Participants/types';
 import {PacketSessionHistoryData} from 'SessionHistory/types';
 
-export {PacketMotionData,PacketSessionData,PacketLapData,PacketCarDamageData,PacketCarSetupData,PacketCarStatusData,PacketCarTelemetryData,PacketEventData,PacketFinalClassificationData,PacketLobbyInfoData,PacketParticipantsData,PacketSessionHistoryData};
+export {PacketMotionData, PacketSessionData, PacketLapData, PacketCarDamageData, PacketCarSetupData, PacketCarStatusData, PacketCarTelemetryData, PacketEventData, PacketFinalClassificationData, PacketLobbyInfoData, PacketParticipantsData, PacketSessionHistoryData};
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
@@ -48,7 +48,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'motion',listener: (data: PacketMotionData) => void): this; //0
+  on(event: 'motion', listener: (data: PacketMotionData) => void): this; //0
 
   /**
   @event "session"
@@ -59,7 +59,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'session',listener: (data: PacketSessionData) => void): this; //1
+  on(event: 'session', listener: (data: PacketSessionData) => void): this; //1
 
   /**
   @event "lapData"
@@ -70,7 +70,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'lapData',listener: (data: PacketLapData) => void): this; //2
+  on(event: 'lapData', listener: (data: PacketLapData) => void): this; //2
 
   /**
   @event "event"
@@ -81,7 +81,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'event',listener: (data: PacketEventData) => void): this; //3
+  on(event: 'event', listener: (data: PacketEventData) => void): this; //3
 
   /**
   @event "participants"
@@ -92,7 +92,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'participants',listener: (data: PacketParticipantsData) => void): this; //4
+  on(event: 'participants', listener: (data: PacketParticipantsData) => void): this; //4
 
   /**
   @event "carSetups"
@@ -103,7 +103,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'carSetups',listener: (data: PacketCarSetupData) => void): this; //5
+  on(event: 'carSetups', listener: (data: PacketCarSetupData) => void): this; //5
 
   /**
   @event "carTelemetry"
@@ -114,7 +114,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'carTelemetry',listener: (data: PacketCarTelemetryData) => void): this; //6
+  on(event: 'carTelemetry', listener: (data: PacketCarTelemetryData) => void): this; //6
 
   /**
   @event "carStatus"
@@ -125,7 +125,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'carStatus',listener: (data: PacketCarStatusData) => void): this; //7
+  on(event: 'carStatus', listener: (data: PacketCarStatusData) => void): this; //7
 
   /**
   @event "lobbyInfo"
@@ -136,7 +136,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'lobbyInfo',listener: (data: PacketLobbyInfoData) => void): this; //8
+  on(event: 'lobbyInfo', listener: (data: PacketLobbyInfoData) => void): this; //8
 
   /**
   @event "finalClassification"
@@ -147,7 +147,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'finalClassification',listener: (data: PacketFinalClassificationData) => void): this; //8
+  on(event: 'finalClassification', listener: (data: PacketFinalClassificationData) => void): this; //8
 
   /**
   @event "carDamage"
@@ -158,7 +158,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'carDamage',listener: (data: PacketCarDamageData) => void): this; //10
+  on(event: 'carDamage', listener: (data: PacketCarDamageData) => void): this; //10
 
   /**
   @event "sessionHistory"
@@ -169,7 +169,7 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'sessionHistory',listener: (data: PacketSessionHistoryData) => void): this; //11
+  on(event: 'sessionHistory', listener: (data: PacketSessionHistoryData) => void): this; //11
 }
 export class F122UDP extends EventEmitter {
   private socket: Socket;
@@ -179,7 +179,7 @@ export class F122UDP extends EventEmitter {
   constructor(options: Options = {}) {
     super();
 
-    const {port = DEFAULT_PORT,address = ADDRESS} = options;
+    const {port = DEFAULT_PORT, address = ADDRESS} = options;
 
     this.port = port;
     this.address = address;
@@ -189,81 +189,81 @@ export class F122UDP extends EventEmitter {
   // create socket
   start() {
     // if socket is not created, create it
-    if(!this.socket) {
+    if (!this.socket) {
       this.socket = createSocket('udp4');
     }
-    this.socket.bind({port: this.port,address: this.address});
-    this.socket.on('listening',(): void => {
-      this.socket.on('message',(msg: Buffer,rinfo: RemoteInfo): void => {
-        switch(rinfo.size) {
+    this.socket.bind({port: this.port, address: this.address});
+    this.socket.on('listening', (): void => {
+      this.socket.on('message', (msg: Buffer, rinfo: RemoteInfo): void => {
+        switch (rinfo.size) {
           case packetSize.Motion: {
             const {data} = new PacketMotionDataParser(msg);
-            this.emit('motion',data);
+            this.emit('motion', data);
 
             break;
           }
           case packetSize.Session:
             {
               const {data} = new PacketSessionDataParser(msg);
-              this.emit('session',data);
+              this.emit('session', data);
             }
 
             break;
           case packetSize.LapData: {
             const {data} = new PacketLapDataParser(msg);
-            this.emit('lapData',data);
+            this.emit('lapData', data);
 
             break;
           }
           case packetSize.Event: {
             const {data} = new PacketEventDataParser(msg);
 
-            this.emit('event',data);
+            this.emit('event', data);
 
             break;
           }
           case packetSize.Participants: {
             const {data} = new PacketParticipantsParser(msg);
-            this.emit('participants',data);
+            this.emit('participants', data);
 
             break;
           }
           case packetSize.CarSetups: {
             const {data} = new PacketCarSetupDataParser(msg);
-            this.emit('carSetups',data);
+            this.emit('carSetups', data);
             // log packet size
 
             break;
           }
           case packetSize.CarTelemetry: {
             const {data} = new PacketCarTelemetryDataParser(msg);
-            this.emit('carTelemetry',data);
+            this.emit('carTelemetry', data);
 
             break;
           }
 
           case packetSize.CarStatus: {
             const {data} = new PacketCarStatusDataParser(msg);
-            this.emit('carStatus',data);
+            this.emit('carStatus', data);
             break;
           }
 
           case packetSize.FinalClassification: {
             const {data} = new PacketFinalClassificationDataParser(msg);
-            this.emit('finalClassification',data);
+            this.emit('finalClassification', data);
             break;
           }
 
           case packetSize.LobbyInfo:
             {
               const {data} = new PacketLobbyInfoDataParser(msg);
-              this.emit('lobbyInfo',data);
+              this.emit('lobbyInfo', data);
             }
             break;
           case packetSize.CarDamage:
             {
               const {data} = new PacketCarDamageDataParser(msg);
-              this.emit('carDamage',data);
+              this.emit('carDamage', data);
               //12685950950652358499n
             }
             break;
@@ -271,7 +271,7 @@ export class F122UDP extends EventEmitter {
             {
               const {data} = new PacketSessionHistoryDataParser(msg);
 
-              this.emit('sessionHistory',data);
+              this.emit('sessionHistory', data);
             }
             break;
           default:
