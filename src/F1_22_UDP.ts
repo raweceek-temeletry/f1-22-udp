@@ -28,20 +28,7 @@ import {PacketLobbyInfoData} from 'lobby/types';
 import {PacketParticipantsData} from 'Participants/types';
 import {PacketSessionHistoryData} from 'SessionHistory/types';
 
-export {
-  PacketMotionData,
-  PacketSessionData,
-  PacketLapData,
-  PacketCarDamageData,
-  PacketCarSetupData,
-  PacketCarStatusData,
-  PacketCarTelemetryData,
-  PacketEventData,
-  PacketFinalClassificationData,
-  PacketLobbyInfoData,
-  PacketParticipantsData,
-  PacketSessionHistoryData
-}
+export {PacketMotionData,PacketSessionData,PacketLapData,PacketCarDamageData,PacketCarSetupData,PacketCarStatusData,PacketCarTelemetryData,PacketEventData,PacketFinalClassificationData,PacketLobbyInfoData,PacketParticipantsData,PacketSessionHistoryData};
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
