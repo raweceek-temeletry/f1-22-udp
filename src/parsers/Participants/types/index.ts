@@ -1,4 +1,4 @@
-import {PacketHeader} from '@Type/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 interface ParticipantData {
   /*uint8*/ m_aiControlled: number;

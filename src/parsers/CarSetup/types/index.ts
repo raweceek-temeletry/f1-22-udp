@@ -1,4 +1,4 @@
-import {PacketHeader} from '@Type/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 interface CarSetupData {
   /*uint8*/ m_frontWing: number;
@@ -25,7 +25,7 @@ interface CarSetupData {
   /*float*/ m_fuelLoad: number;
 }
 
-interface PacketCarSetupData {
+export interface PacketCarSetupData {
   /*PacketHeader*/ m_header: PacketHeader;
   /*CarSetupData*/ m_carSetups: CarSetupData[];
 }

@@ -1,4 +1,4 @@
-import {PacketHeader} from '@Type/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 export interface CarTelemetryData {
   /*uint16*/ m_speed: number;

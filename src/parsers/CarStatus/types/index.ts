@@ -1,4 +1,4 @@
-import {PacketHeader} from '@Type/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 export interface CarStatusData {
   /*uint8*/ m_tractionControl: number;

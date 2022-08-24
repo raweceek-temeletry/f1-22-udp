@@ -15,18 +15,18 @@ import {PacketCarDamageDataParser} from './parsers/CarDamage/parsers';
 import {PacketSessionHistoryDataParser} from './parsers/SessionHistory/parsers';
 
 // types
-import {PacketMotionData} from 'Motion/types';
-import {PacketSessionData} from 'Session/types';
-import {PacketLapData} from 'LapData/types';
-import {PacketCarDamageData} from 'CarDamage/types';
-import {PacketCarSetupData} from 'CarSetup/types';
-import {PacketCarStatusData} from 'CarStatus/types';
-import {PacketCarTelemetryData} from 'CarTelemetry/types';
-import {PacketEventData} from 'Event/types';
-import {PacketFinalClassificationData} from 'FinalClassification/types';
-import {PacketLobbyInfoData} from 'lobby/types';
-import {PacketParticipantsData} from 'Participants/types';
-import {PacketSessionHistoryData} from 'SessionHistory/types';
+import {PacketMotionData} from './parsers/Motion/types';
+import {PacketSessionData} from './parsers/Session/types';
+import {PacketLapData} from './parsers/LapData/types';
+import {PacketCarDamageData} from './parsers/CarDamage/types';
+import {PacketCarSetupData} from './parsers/CarSetup/types';
+import {PacketCarStatusData} from './parsers/CarStatus/types';
+import {PacketCarTelemetryData} from './parsers/CarTelemetry/types';
+import {PacketEventData} from './parsers/Event/types';
+import {PacketFinalClassificationData} from './parsers/FinalClassification/types';
+import {PacketLobbyInfoData} from './parsers/lobby/types';
+import {PacketParticipantsData} from './parsers/Participants/types';
+import {PacketSessionHistoryData} from './parsers/SessionHistory/types';
 
 export {PacketMotionData, PacketSessionData, PacketLapData, PacketCarDamageData, PacketCarSetupData, PacketCarStatusData, PacketCarTelemetryData, PacketEventData, PacketFinalClassificationData, PacketLobbyInfoData, PacketParticipantsData, PacketSessionHistoryData};
 

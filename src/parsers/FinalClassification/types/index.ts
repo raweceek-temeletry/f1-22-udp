@@ -1,4 +1,4 @@
-import {PacketHeader} from '@Type/PacketHeader';
+import {PacketHeader} from '../../PacketHeader/types';
 
 interface FinalClassificationData {
   /*uint8*/ m_position: number;
@@ -17,7 +17,7 @@ interface FinalClassificationData {
   /*uint8[8]*/ m_tyreStintsEndLaps: number[];
 }
 
-interface PacketFinalClassificationData {
+export interface PacketFinalClassificationData {
   /*PacketHeader*/ m_header: PacketHeader;
   /*uint8*/ m_numCars: number;
   /*FinalClassificationData[22]*/ m_classificationData: FinalClassificationData[];
