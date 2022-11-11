@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/types';
+import { PacketHeader } from '../../PacketHeader/types/index.js';
 
 /*struct LapHistoryData
 {

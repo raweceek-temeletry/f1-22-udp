@@ -1,11 +1,11 @@
-import {Parser} from 'binary-parser';
-import {F1Parser} from '../../f1.parser';
+import { Parser } from 'binary-parser';
+import { F1Parser } from '../../f1.parser.js';
 
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketEventData} from '../types';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketEventData } from '../types/index.js';
 export type EventCode = string;
 
-export const EVENT_CODES: {[index: string]: EventCode} = {
+export const EVENT_CODES: { [index: string]: EventCode } = {
   SessionStarted: 'SSTA',
   SessionEnded: 'SEND',
   FastestLap: 'FTLP',
@@ -57,14 +57,27 @@ export class PenaltyParser extends F1Parser {
   constructor() {
     super();
 
-    this.endianess('little').uint8('penaltyType').uint8('infringementType').uint8('vehicleIdx').uint8('otherVehicleIdx').uint8('time').uint8('lapNum').uint8('placesGained');
+    this.endianess('little')
+      .uint8('penaltyType')
+      .uint8('infringementType')
+      .uint8('vehicleIdx')
+      .uint8('otherVehicleIdx')
+      .uint8('time')
+      .uint8('lapNum')
+      .uint8('placesGained');
   }
 }
 
 export class SpeedTrapParser extends F1Parser {
   constructor() {
     super();
-    this.endianess('little').uint8('vehicleIdx').floatle('speed').uint8('isOverallFastestInSession').uint8('isDriverFastestInSession').uint8('fastestVehicleIdxInSession').floatle('fastestSpeedInSession');
+    this.endianess('little')
+      .uint8('vehicleIdx')
+      .floatle('speed')
+      .uint8('isOverallFastestInSession')
+      .uint8('isDriverFastestInSession')
+      .uint8('fastestVehicleIdxInSession')
+      .floatle('fastestSpeedInSession');
   }
 }
 
@@ -99,7 +112,9 @@ export class StopGoPenaltyServedParser extends F1Parser {
 export class FlashbackParser extends F1Parser {
   constructor() {
     super();
-    this.endianess('little').uint32le('flashbackFrameIdentifier').floatle('flashbackSessionTime');
+    this.endianess('little')
+      .uint32le('flashbackFrameIdentifier')
+      .floatle('flashbackSessionTime');
   }
 }
 
@@ -156,45 +171,56 @@ export class PacketEventDataParser extends F1Parser {
   constructor(buffer: Buffer) {
     super();
 
-    this.endianess('little').nest('m_header', {type: new PacketHeaderParser()}).string('m_eventStringCode', {length: 4}).unpack2021Format(buffer);
+    this.endianess('little')
+      .nest('m_header', { type: new PacketHeaderParser() })
+      .string('m_eventStringCode', { length: 4 })
+      .unpack2021Format(buffer);
 
     this.data = this.fromBuffer(buffer) as PacketEventData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 
   unpack2021Format = (buffer: Buffer) => {
     const eventStringCode = this.getEventStringCode(buffer);
 
     if (eventStringCode === EVENT_CODES.FastestLap) {
-      this.nest('FastestLap', {type: new FastestLapParser()});
+      this.nest('FastestLap', { type: new FastestLapParser() });
     } else if (eventStringCode === EVENT_CODES.Retirement) {
-      this.nest('Retirement', {type: new RetirementParser()});
+      this.nest('Retirement', { type: new RetirementParser() });
     } else if (eventStringCode === EVENT_CODES.TeammateInPits) {
-      this.nest('TeamMateInPits', {type: new TeamMateInPitsParser()});
+      this.nest('TeamMateInPits', { type: new TeamMateInPitsParser() });
     } else if (eventStringCode === EVENT_CODES.RaceWinner) {
-      this.nest('RaceWinner', {type: new RaceWinnerParser()});
+      this.nest('RaceWinner', { type: new RaceWinnerParser() });
     } else if (eventStringCode === EVENT_CODES.PenaltyIssued) {
-      this.nest('Penalty', {type: new PenaltyParser()});
+      this.nest('Penalty', { type: new PenaltyParser() });
     } else if (eventStringCode === EVENT_CODES.SpeedTrapTriggered) {
-      this.nest('SpeedTrap', {type: new SpeedTrapParser()});
+      this.nest('SpeedTrap', { type: new SpeedTrapParser() });
     } else if (eventStringCode === EVENT_CODES.StartLights) {
-      this.nest('StartLights', {type: new StartLightsParser()});
+      this.nest('StartLights', { type: new StartLightsParser() });
     } else if (eventStringCode === EVENT_CODES.LightsOut) {
-      this.nest('StartLightsOut', {type: new StartLightsOutParser()});
+      this.nest('StartLightsOut', { type: new StartLightsOutParser() });
     } else if (eventStringCode === EVENT_CODES.DriveThroughServed) {
-      this.nest('DriveThroughPenaltyServed', {type: new DriveThroughPenaltyServedParser()});
+      this.nest('DriveThroughPenaltyServed', {
+        type: new DriveThroughPenaltyServedParser(),
+      });
     } else if (eventStringCode === EVENT_CODES.StopGoServed) {
-      this.nest('StopGoPenaltyServed', {type: new StopGoPenaltyServedParser()});
+      this.nest('StopGoPenaltyServed', {
+        type: new StopGoPenaltyServedParser(),
+      });
     } else if (eventStringCode === EVENT_CODES.Flashback) {
-      this.nest('Flashback', {type: new FlashbackParser()});
+      this.nest('Flashback', { type: new FlashbackParser() });
     } else if (eventStringCode === EVENT_CODES.ButtonStatus) {
-      this.nest('Buttons', {type: new ButtonsParser()});
+      this.nest('Buttons', { type: new ButtonsParser() });
     }
   };
 
   getEventStringCode = (buffer: Buffer) => {
-    const headerParser = new Parser().endianess('little').nest('m_header', {type: new PacketHeaderParser()}).string('m_eventStringCode', {length: 4});
-    const {m_eventStringCode} = headerParser.parse(buffer);
+    const headerParser = new Parser()
+      .endianess('little')
+      .nest('m_header', { type: new PacketHeaderParser() })
+      .string('m_eventStringCode', { length: 4 });
+    const { m_eventStringCode } = headerParser.parse(buffer);
     return m_eventStringCode;
   };
 }

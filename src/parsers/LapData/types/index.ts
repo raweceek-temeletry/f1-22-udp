@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/types';
+import { PacketHeader } from '../../PacketHeader/types/index.js';
 interface LapData {
   m_lastLapTimeInMS: number; // uint32le
   m_currentLapTimeInMS: number; // uint32le

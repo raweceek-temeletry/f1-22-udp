@@ -1,8 +1,9 @@
 {
   "name": "f1-22-udp",
-  "version": "2.1.1",
+  "version": "2.2.1",
   "main": "build/src/F1_22_UDP.js",
   "types": "build/src/F1_22_UDP.d.ts",
+  "type": "module",
   "files": [
     "build/src/"
   ],
@@ -19,27 +20,24 @@
   },
   "devDependencies": {
     "@types/binary-parser": "1.5.1",
-    "@types/fs-extra": "^9.0.13",
-    "@types/node": "^14.11.2",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "eslint": "7.32.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "fs-extra": "^10.0.0",
-    "gts": "^3.1.0",
-    "husky": "^7.0.4",
+    "@types/fs-extra": "9.0.13",
+    "@types/node": "18.11.9",
+    "fs-extra": "10.1.0",
+    "gts": "3.1.1",
+    "husky": "7.0.4",
     "lint-staged": "11.2.6",
-    "typescript": "^4.0.3",
-    "uglify-js": "^3.16.0"
+    "typescript": "4.8.4",
+    "uglify-js": "3.17.4"
   },
   "bin": {
     "forward": "bin/index.js"
   },
   "scripts": {
+    "delete_all_.js_files_in_project_src_and_dev": "del-cli --dry-run  ./src/**/*.js  ./dev/**/*.js",
     "prepublishOnly": "npm run build",
-    "start": "npm run build && node build/dev/dev.js",
-    "build": "tsc",
-    "build:dev": "tsc --watch",
+    "start": "npm run build && node run build:dev",
+    "build": "tsc && npm run build:dev",
+    "build:dev": "tsc ./dev/dev.ts",
     "build-prod": "tsc && npm run uglify",
     "build:link": "npm run build && npm link",
     "type-check:watch": "npm run type-check -- --watch",
@@ -56,12 +54,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint && gts fix && npm run build-prod"
+      "pre-commit": "lint && npm run fix && npm run build-prod"
     }
   },
   "lint-staged": {
     "*.ts": [
-      "gts fix",
+      "npm run fix",
       "git add"
     ]
   },

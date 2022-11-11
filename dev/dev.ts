@@ -1,4 +1,4 @@
-import {F122UDP} from '../src/F1_22_UDP';
+import {F122UDP} from '../src/F1_22_UDP.js';
 
 
 const f122 = new F122UDP({address: "192.168.88.114"});

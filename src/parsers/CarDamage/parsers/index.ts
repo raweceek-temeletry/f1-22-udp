@@ -1,15 +1,15 @@
-import {Parser} from 'binary-parser';
-import {PacketCarDamageData} from 'CarDamage/types';
-import {PacketHeaderParser} from '../../PacketHeader/parser';
+import { Parser } from 'binary-parser';
+import { PacketCarDamageData } from '../../CarDamage/types/index.js';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
 
-import {F1Parser} from '../../f1.parser';
+import { F1Parser } from '../../f1.parser.js';
 
 export class CarDamageDataParser extends F1Parser {
   constructor() {
     super();
-    this.array('m_tyresWear', {length: 4, type: new Parser().floatle('')})
-      .array('m_tyresDamage', {length: 4, type: new Parser().uint8('')})
-      .array('m_brakesDamage', {length: 4, type: new Parser().uint8('')})
+    this.array('m_tyresWear', { length: 4, type: new Parser().floatle('') })
+      .array('m_tyresDamage', { length: 4, type: new Parser().uint8('') })
+      .array('m_brakesDamage', { length: 4, type: new Parser().uint8('') })
       .uint8('m_frontLeftWingDamage')
       .uint8('m_frontRightWingDamage')
       .uint8('m_rearWingDamage')
@@ -46,6 +46,7 @@ export class PacketCarDamageDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketCarDamageData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

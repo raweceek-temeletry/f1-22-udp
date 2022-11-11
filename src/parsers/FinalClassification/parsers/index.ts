@@ -1,7 +1,7 @@
-import {Parser} from 'binary-parser';
-import {PacketFinalClassificationData} from 'FinalClassification/types';
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {F1Parser} from '../../f1.parser';
+import { Parser } from 'binary-parser';
+import { PacketFinalClassificationData } from './../../FinalClassification/types/index.js';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { F1Parser } from '../../f1.parser.js';
 
 export class FinalClassificationDataParser extends F1Parser {
   constructor() {
@@ -53,6 +53,7 @@ export class PacketFinalClassificationDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketFinalClassificationData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

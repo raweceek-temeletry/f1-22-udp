@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/types';
+import { PacketHeader } from '../../PacketHeader/types/index.js';
 
 interface CarSetupData {
   /*uint8*/ m_frontWing: number;

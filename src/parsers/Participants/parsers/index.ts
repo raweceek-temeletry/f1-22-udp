@@ -1,6 +1,6 @@
-import {F1Parser} from '../../f1.parser';
-import {PacketHeaderParser} from '../../../parsers/PacketHeader/parser';
-import {PacketParticipantsData} from '../types';
+import { F1Parser } from '../../f1.parser.js';
+import { PacketHeaderParser } from '../../../parsers/PacketHeader/parser/index.js';
+import { PacketParticipantsData } from '../types/index.js';
 class ParticipantParser extends F1Parser {
   constructor() {
     super();
@@ -20,7 +20,7 @@ class ParticipantParser extends F1Parser {
       //uint8
       .uint8('m_nationality')
       // string
-      .string('m_name', {length: 48, stripNull: true})
+      .string('m_name', { length: 48, stripNull: true })
       // uint8
       .uint8('m_yourTelemetry');
   }
@@ -32,12 +32,13 @@ export class PacketParticipantsParser extends F1Parser {
     super();
     this.endianess('little')
       //PacketHeader
-      .nest('m_header', {type: new PacketHeaderParser()})
+      .nest('m_header', { type: new PacketHeaderParser() })
       //uint8
       .uint8('m_numActiveCars')
-      .array('m_participants', {type: new ParticipantParser(), length: 22});
+      .array('m_participants', { type: new ParticipantParser(), length: 22 });
 
     this.data = this.fromBuffer(buffer) as PacketParticipantsData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

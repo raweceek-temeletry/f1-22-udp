@@ -1,4 +1,4 @@
-import {PacketHeader} from '../../PacketHeader/types';
+import { PacketHeader } from '../../PacketHeader/types/index.js';
 
 interface FinalClassificationData {
   /*uint8*/ m_position: number;

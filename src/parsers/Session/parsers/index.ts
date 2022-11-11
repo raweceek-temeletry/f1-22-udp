@@ -1,6 +1,6 @@
-import {F1Parser} from '../../f1.parser';
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketSessionData} from '../types';
+import { F1Parser } from '../../f1.parser.js';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketSessionData } from '../types/index.js';
 
 class MarshalZoneParser extends F1Parser {
   constructor() {
@@ -133,7 +133,7 @@ export class PacketSessionDataParser extends F1Parser {
       //uint8
       .uint8('m_numMarshalZones')
       //MarshalZone
-      .array('m_marshalZones', {type: new MarshalZoneParser(), length: 21})
+      .array('m_marshalZones', { type: new MarshalZoneParser(), length: 21 })
       //uint8
       .uint8('m_safetyCarStatus')
       //uint8
@@ -141,7 +141,10 @@ export class PacketSessionDataParser extends F1Parser {
       //uint8
       .uint8('m_numWeatherForecastSamples')
       //WeatherForecastSample
-      .array('m_weatherForecastSamples', {type: new WeatherForecastSampleParser(), length: 56})
+      .array('m_weatherForecastSamples', {
+        type: new WeatherForecastSampleParser(),
+        length: 56,
+      })
       //uint8
       .uint8('m_forecastAccuracy')
       //uint8
@@ -186,6 +189,7 @@ export class PacketSessionDataParser extends F1Parser {
       .uint8('m_sessionLength');
 
     this.data = this.fromBuffer(buffer) as PacketSessionData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

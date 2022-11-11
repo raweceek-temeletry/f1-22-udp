@@ -1,6 +1,6 @@
-import {F1Parser} from '../../f1.parser';
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketCarSetupData} from '../types';
+import { F1Parser } from '../../f1.parser.js';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketCarSetupData } from '../types/index.js';
 
 class CarSetupDataParser extends F1Parser {
   constructor() {
@@ -47,6 +47,7 @@ export class PacketCarSetupDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketCarSetupData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

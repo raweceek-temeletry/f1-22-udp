@@ -1,4 +1,4 @@
-import {F1Parser} from '../../f1.parser';
+import { F1Parser } from '../../f1.parser.js';
 
 export class CarStatusDataParser extends F1Parser {
   constructor() {
@@ -31,8 +31,8 @@ export class CarStatusDataParser extends F1Parser {
   }
 }
 
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketCarStatusData} from '../types';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketCarStatusData } from '../types/index.js';
 
 export class PacketCarStatusDataParser extends F1Parser {
   data: PacketCarStatusData;
@@ -49,6 +49,7 @@ export class PacketCarStatusDataParser extends F1Parser {
         type: new CarStatusDataParser(),
       });
     this.data = this.fromBuffer(buffer) as PacketCarStatusData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

@@ -1,6 +1,6 @@
-import {F1Parser} from '../../f1.parser';
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketMotionData} from '../types';
+import { F1Parser } from '../../f1.parser.js';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketMotionData } from '../types/index.js';
 
 class CarMotionDataParser extends F1Parser {
   constructor() {
@@ -31,13 +31,13 @@ export class PacketMotionDataParser extends F1Parser {
   data: PacketMotionData;
   constructor(msg: Buffer) {
     super();
-    this.nest('m_header', {type: new PacketHeaderParser()})
-      .array('m_carMotionData', {type: new CarMotionDataParser(), length: 20})
-      .array('m_suspensionPosition', {type: 'floatle', length: 4})
-      .array('m_suspensionVelocity', {type: 'floatle', length: 4})
-      .array('m_suspensionAcceleration', {type: 'floatle', length: 4})
-      .array('m_wheelSpeed', {type: 'floatle', length: 4})
-      .array('m_wheelSlip', {type: 'floatle', length: 4})
+    this.nest('m_header', { type: new PacketHeaderParser() })
+      .array('m_carMotionData', { type: new CarMotionDataParser(), length: 20 })
+      .array('m_suspensionPosition', { type: 'floatle', length: 4 })
+      .array('m_suspensionVelocity', { type: 'floatle', length: 4 })
+      .array('m_suspensionAcceleration', { type: 'floatle', length: 4 })
+      .array('m_wheelSpeed', { type: 'floatle', length: 4 })
+      .array('m_wheelSlip', { type: 'floatle', length: 4 })
       .floatle('m_localVelocityX')
       .floatle('m_localVelocityY')
       .floatle('m_localVelocityZ')
@@ -50,6 +50,7 @@ export class PacketMotionDataParser extends F1Parser {
       .floatle('m_frontWheelsAngle');
 
     this.data = this.fromBuffer(msg) as PacketMotionData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }

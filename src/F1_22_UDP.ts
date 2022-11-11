@@ -1,34 +1,47 @@
-import {PacketCarStatusDataParser} from './parsers/CarStatus/parsers';
-import {createSocket, RemoteInfo, Socket} from 'node:dgram';
-import {EventEmitter} from 'node:stream';
-import {packetSize} from './constants';
-import {PacketCarSetupDataParser} from './parsers/CarSetup/parsers';
-import {PacketCarTelemetryDataParser} from './parsers/CarTelemetry/parsers';
-import {PacketEventDataParser} from './parsers/Event/parsers';
-import {PacketLapDataParser} from './parsers/LapData/parsers';
-import {PacketMotionDataParser} from './parsers/Motion/parsers';
-import {PacketParticipantsParser} from './parsers/Participants/parsers';
-import {PacketSessionDataParser} from './parsers/Session/parsers';
-import {PacketFinalClassificationDataParser} from './parsers/FinalClassification/parsers';
-import {PacketLobbyInfoDataParser} from './parsers/lobby/parsers';
-import {PacketCarDamageDataParser} from './parsers/CarDamage/parsers';
-import {PacketSessionHistoryDataParser} from './parsers/SessionHistory/parsers';
+import { PacketCarStatusDataParser } from './parsers/CarStatus/parsers/index.js';
+import { createSocket, RemoteInfo, Socket } from 'node:dgram';
+import { EventEmitter } from 'node:events';
+import { packetSize } from './constants/index.js';
+import { PacketCarSetupDataParser } from './parsers/CarSetup/parsers/index.js';
+import { PacketCarTelemetryDataParser } from './parsers/CarTelemetry/parsers/index.js';
+import { PacketEventDataParser } from './parsers/Event/parsers/index.js';
+import { PacketLapDataParser } from './parsers/LapData/parsers/index.js';
+import { PacketMotionDataParser } from './parsers/Motion/parsers/index.js';
+import { PacketParticipantsParser } from './parsers/Participants/parsers/index.js';
+import { PacketSessionDataParser } from './parsers/Session/parsers/index.js';
+import { PacketFinalClassificationDataParser } from './parsers/FinalClassification/parsers/index.js';
+import { PacketLobbyInfoDataParser } from './parsers/lobby/parsers/index.js';
+import { PacketCarDamageDataParser } from './parsers/CarDamage/parsers/index.js';
+import { PacketSessionHistoryDataParser } from './parsers/SessionHistory/parsers/index.js';
 
 // types
-import {PacketMotionData} from './parsers/Motion/types';
-import {PacketSessionData} from './parsers/Session/types';
-import {PacketLapData} from './parsers/LapData/types';
-import {PacketCarDamageData} from './parsers/CarDamage/types';
-import {PacketCarSetupData} from './parsers/CarSetup/types';
-import {PacketCarStatusData} from './parsers/CarStatus/types';
-import {PacketCarTelemetryData} from './parsers/CarTelemetry/types';
-import {PacketEventData} from './parsers/Event/types';
-import {PacketFinalClassificationData} from './parsers/FinalClassification/types';
-import {PacketLobbyInfoData} from './parsers/lobby/types';
-import {PacketParticipantsData} from './parsers/Participants/types';
-import {PacketSessionHistoryData} from './parsers/SessionHistory/types';
+import { PacketMotionData } from './parsers/Motion/types/index.js';
+import { PacketSessionData } from './parsers/Session/types/index.js';
+import { PacketLapData } from './parsers/LapData/types/index.js';
+import { PacketCarDamageData } from './parsers/CarDamage/types/index.js';
+import { PacketCarSetupData } from './parsers/CarSetup/types/index.js';
+import { PacketCarStatusData } from './parsers/CarStatus/types/index.js';
+import { PacketCarTelemetryData } from './parsers/CarTelemetry/types/index.js';
+import { PacketEventData } from './parsers/Event/types/index.js';
+import { PacketFinalClassificationData } from './parsers/FinalClassification/types/index.js';
+import { PacketLobbyInfoData } from './parsers/lobby/types/index.js';
+import { PacketParticipantsData } from './parsers/Participants/types/index.js';
+import { PacketSessionHistoryData } from './parsers/SessionHistory/types/index.js';
 
-export {PacketMotionData, PacketSessionData, PacketLapData, PacketCarDamageData, PacketCarSetupData, PacketCarStatusData, PacketCarTelemetryData, PacketEventData, PacketFinalClassificationData, PacketLobbyInfoData, PacketParticipantsData, PacketSessionHistoryData};
+export {
+  PacketMotionData,
+  PacketSessionData,
+  PacketLapData,
+  PacketCarDamageData,
+  PacketCarSetupData,
+  PacketCarStatusData,
+  PacketCarTelemetryData,
+  PacketEventData,
+  PacketFinalClassificationData,
+  PacketLobbyInfoData,
+  PacketParticipantsData,
+  PacketSessionHistoryData,
+};
 
 const DEFAULT_PORT = 20777;
 const ADDRESS = 'localhost';
@@ -92,7 +105,10 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'participants', listener: (data: PacketParticipantsData) => void): this; //4
+  on(
+    event: 'participants',
+    listener: (data: PacketParticipantsData) => void
+  ): this; //4
 
   /**
   @event "carSetups"
@@ -114,7 +130,10 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'carTelemetry', listener: (data: PacketCarTelemetryData) => void): this; //6
+  on(
+    event: 'carTelemetry',
+    listener: (data: PacketCarTelemetryData) => void
+  ): this; //6
 
   /**
   @event "carStatus"
@@ -147,7 +166,10 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'finalClassification', listener: (data: PacketFinalClassificationData) => void): this; //8
+  on(
+    event: 'finalClassification',
+    listener: (data: PacketFinalClassificationData) => void
+  ): this; //8
 
   /**
   @event "carDamage"
@@ -169,7 +191,10 @@ export declare interface F122UDP {
     })
     ```
   */
-  on(event: 'sessionHistory', listener: (data: PacketSessionHistoryData) => void): this; //11
+  on(
+    event: 'sessionHistory',
+    listener: (data: PacketSessionHistoryData) => void
+  ): this; //11
 }
 export class F122UDP extends EventEmitter {
   private socket: Socket;
@@ -179,7 +204,7 @@ export class F122UDP extends EventEmitter {
   constructor(options: Options = {}) {
     super();
 
-    const {port = DEFAULT_PORT, address = ADDRESS} = options;
+    const { port = DEFAULT_PORT, address = ADDRESS } = options;
 
     this.port = port;
     this.address = address;
@@ -192,84 +217,84 @@ export class F122UDP extends EventEmitter {
     if (!this.socket) {
       this.socket = createSocket('udp4');
     }
-    this.socket.bind({port: this.port, address: this.address});
+    this.socket.bind({ port: this.port, address: this.address });
     this.socket.on('listening', (): void => {
       this.socket.on('message', (msg: Buffer, rinfo: RemoteInfo): void => {
         switch (rinfo.size) {
           case packetSize.Motion: {
-            const {data} = new PacketMotionDataParser(msg);
+            const { data } = new PacketMotionDataParser(msg);
             this.emit('motion', data);
 
             break;
           }
           case packetSize.Session:
             {
-              const {data} = new PacketSessionDataParser(msg);
+              const { data } = new PacketSessionDataParser(msg);
               this.emit('session', data);
             }
 
             break;
           case packetSize.LapData: {
-            const {data} = new PacketLapDataParser(msg);
+            const { data } = new PacketLapDataParser(msg);
             this.emit('lapData', data);
 
             break;
           }
           case packetSize.Event: {
-            const {data} = new PacketEventDataParser(msg);
+            const { data } = new PacketEventDataParser(msg);
 
             this.emit('event', data);
 
             break;
           }
           case packetSize.Participants: {
-            const {data} = new PacketParticipantsParser(msg);
+            const { data } = new PacketParticipantsParser(msg);
             this.emit('participants', data);
 
             break;
           }
           case packetSize.CarSetups: {
-            const {data} = new PacketCarSetupDataParser(msg);
+            const { data } = new PacketCarSetupDataParser(msg);
             this.emit('carSetups', data);
             // log packet size
 
             break;
           }
           case packetSize.CarTelemetry: {
-            const {data} = new PacketCarTelemetryDataParser(msg);
+            const { data } = new PacketCarTelemetryDataParser(msg);
             this.emit('carTelemetry', data);
 
             break;
           }
 
           case packetSize.CarStatus: {
-            const {data} = new PacketCarStatusDataParser(msg);
+            const { data } = new PacketCarStatusDataParser(msg);
             this.emit('carStatus', data);
             break;
           }
 
           case packetSize.FinalClassification: {
-            const {data} = new PacketFinalClassificationDataParser(msg);
+            const { data } = new PacketFinalClassificationDataParser(msg);
             this.emit('finalClassification', data);
             break;
           }
 
           case packetSize.LobbyInfo:
             {
-              const {data} = new PacketLobbyInfoDataParser(msg);
+              const { data } = new PacketLobbyInfoDataParser(msg);
               this.emit('lobbyInfo', data);
             }
             break;
           case packetSize.CarDamage:
             {
-              const {data} = new PacketCarDamageDataParser(msg);
+              const { data } = new PacketCarDamageDataParser(msg);
               this.emit('carDamage', data);
               //12685950950652358499n
             }
             break;
           case packetSize.SessionHistory:
             {
-              const {data} = new PacketSessionHistoryDataParser(msg);
+              const { data } = new PacketSessionHistoryDataParser(msg);
 
               this.emit('sessionHistory', data);
             }

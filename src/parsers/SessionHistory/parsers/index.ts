@@ -1,12 +1,16 @@
-import {F1Parser} from '../../f1.parser';
+import { F1Parser } from '../../f1.parser.js';
 
-import {PacketHeaderParser} from '../../PacketHeader/parser';
-import {PacketSessionHistoryData} from '../../SessionHistory/types';
+import { PacketHeaderParser } from '../../PacketHeader/parser/index.js';
+import { PacketSessionHistoryData } from '../../SessionHistory/types/index.js';
 
 class LapHistoryDataParser extends F1Parser {
   constructor() {
     super();
-    this.uint32le('m_lapTimeInMS').uint16le('m_sector1TimeInMS').uint16le('m_sector2TimeInMS').uint16le('m_sector3TimeInMS').uint8('m_lapValidBitFlags');
+    this.uint32le('m_lapTimeInMS')
+      .uint16le('m_sector1TimeInMS')
+      .uint16le('m_sector2TimeInMS')
+      .uint16le('m_sector3TimeInMS')
+      .uint8('m_lapValidBitFlags');
   }
 }
 
@@ -37,13 +41,16 @@ export class PacketSessionHistoryDataParser extends F1Parser {
       });
 
     this.data = this.fromBuffer(buffer) as PacketSessionHistoryData;
-    this.data.m_header.m_sessionUID = this.data.m_header.m_sessionUID.toString();
+    this.data.m_header.m_sessionUID =
+      this.data.m_header.m_sessionUID.toString();
   }
 }
 
 class TyreStintHistoryDataParser extends F1Parser {
   constructor() {
     super();
-    this.uint8('m_endLap').uint8('m_tyreActualCompound').uint8('m_tyreVisualCompound');
+    this.uint8('m_endLap')
+      .uint8('m_tyreActualCompound')
+      .uint8('m_tyreVisualCompound');
   }
 }
