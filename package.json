@@ -1,6 +1,6 @@
 {
   "name": "f1-22-udp",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "build/src/F1_22_UDP.js",
   "types": "build/src/F1_22_UDP.d.ts",
   "files": [
@@ -26,10 +26,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fs-extra": "^10.0.0",
-    "gts": "^3.1.0",
+    "gts": "^3.1.1",
     "husky": "^7.0.4",
     "lint-staged": "11.2.6",
-    "typescript": "^4.0.3",
+    "typescript": "~4.7.0",
     "uglify-js": "^3.16.0"
   },
   "bin": {
@@ -56,7 +56,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint && gts fix && npm run build-prod"
+      "pre-commit": "lint && npm run fix && npm run build-prod"
     }
   },
   "lint-staged": {

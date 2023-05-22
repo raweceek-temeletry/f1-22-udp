@@ -31,7 +31,7 @@ import {PacketSessionHistoryData} from './parsers/SessionHistory/types';
 export {PacketMotionData, PacketSessionData, PacketLapData, PacketCarDamageData, PacketCarSetupData, PacketCarStatusData, PacketCarTelemetryData, PacketEventData, PacketFinalClassificationData, PacketLobbyInfoData, PacketParticipantsData, PacketSessionHistoryData};
 
 const DEFAULT_PORT = 20777;
-const ADDRESS = 'localhost';
+const ADDRESS = '0.0.0.0';
 
 interface Options {
   port?: number;
@@ -192,7 +192,9 @@ export class F122UDP extends EventEmitter {
     if (!this.socket) {
       this.socket = createSocket('udp4');
     }
-    this.socket.bind({port: this.port, address: this.address});
+    this.socket.bind({port: this.port, address: this.address}, () => {
+      this.socket.setBroadcast(true);
+    });
     this.socket.on('listening', (): void => {
       this.socket.on('message', (msg: Buffer, rinfo: RemoteInfo): void => {
         switch (rinfo.size) {
